@@ -16,6 +16,10 @@ namespace spaceinv
                 while (window.IsOpen)
                 {
                     window.DispatchEvents();
+                    float deltatime = clock.Restart().AsSeconds();
+                    deltatime = MathF.Min(deltatime, 0.01f);
+                    window.Clear(new Color(10,10,50));
+                    window.Display();
                 }
             }
         }
