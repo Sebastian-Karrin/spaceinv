@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "4mosohPNgS0=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\bebbe\\Documents\\GitHub\\spaceinv\\spaceinv.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\bebbe\\.nuget\\packages\\csfml\\2.5.0\\csfml.2.5.0.nupkg.sha512",
+    "C:\\Users\\bebbe\\.nuget\\packages\\sfml.audio\\2.5.0\\sfml.audio.2.5.0.nupkg.sha512",
+    "C:\\Users\\bebbe\\.nuget\\packages\\sfml.graphics\\2.5.0\\sfml.graphics.2.5.0.nupkg.sha512",
+    "C:\\Users\\bebbe\\.nuget\\packages\\sfml.net\\2.5.0\\sfml.net.2.5.0.nupkg.sha512",
+    "C:\\Users\\bebbe\\.nuget\\packages\\sfml.system\\2.5.0\\sfml.system.2.5.0.nupkg.sha512",
+    "C:\\Users\\bebbe\\.nuget\\packages\\sfml.window\\2.5.0\\sfml.window.2.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
