@@ -29,6 +29,12 @@ public class Scene
     public void UpdateAll(float deltaTime)
     {
         Loader.LoadScene(this);
+        for (int i = entities.Count - 1; i >= 0; i--)
+        {
+            Entity entity = entities[i];
+            entity.Update(this, deltaTime);
+        }
+        
         for (int i = 0; i < entities.Count; i++)
         {
             Entity entity = entities[i];

@@ -1,6 +1,8 @@
 ﻿using SFML.Graphics;
+using System.Collections.Generic;
 using SFML.System;
 using SFML.Window;
+using spaceinv;
 
 namespace spaceinv;
 
@@ -36,7 +38,7 @@ public class AssetManager
         {
             return found;
         }
-        string fontName = ($"{AssetPath}/{name}.txt");
+        string fontName = ($"assets/{name}.txt");
         Font font = fonts[fontName];
         fonts.Add(name, font);
         return font;
