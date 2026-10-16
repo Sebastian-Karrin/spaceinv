@@ -25,7 +25,7 @@ public class AssetManager
             return found;
         }
         string textureName = ($"assets/{name}.png");
-        Texture texture = textures[textureName];
+        Texture texture = new Texture(textureName);
         textures.Add(name, texture);
         return texture;
     }
@@ -38,6 +38,7 @@ public class AssetManager
         {
             return found;
         }
+        
         string fontName = ($"assets/{name}.txt");
         Font font = fonts[fontName];
         fonts.Add(name, font);

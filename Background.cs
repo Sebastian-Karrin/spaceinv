@@ -11,7 +11,7 @@ public class Background : Entity
     
     public Background() : base("darkPurple")
     {
-        sprite.Position = new Vector2f(0,0);
+        
     }
     
     public override void Create(Scene scene)

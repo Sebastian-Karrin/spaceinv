@@ -10,13 +10,12 @@ namespace spaceinv
         static void Main(string[] args)
         {
             Directory.SetCurrentDirectory(AppContext.BaseDirectory);
-            
             using (var window = new RenderWindow(new VideoMode(900,900), "spaceinv"))
             {
                 window.Closed += (o, e) => window.Close();
                 Clock clock = new Clock();
                 Scene scene = new Scene();
-                
+                scene.Loader.LoadScene(scene);
                 while (window.IsOpen)
                 {
                     window.DispatchEvents();

@@ -9,7 +9,7 @@ public class Entity
     private readonly string textureName;
     private readonly string fontName;
     protected readonly Sprite sprite;
-    public bool isDead;
+    public bool isDead = false;
     public FloatRect Bounds =>sprite.GetGlobalBounds();
     public Vector2f Position { get => sprite.Position; set => sprite.Position = value; }
     public virtual bool Solid => false;
@@ -29,7 +29,6 @@ public class Entity
 
     public virtual void Update(Scene scene, float deltaTime)
     {
-        
     }
 
     public virtual void Render(RenderTarget target)

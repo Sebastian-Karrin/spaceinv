@@ -15,18 +15,24 @@ public class SceneLoader
         loaders = new Dictionary<char, Func<Entity>>();
     }
 
+    public void Load(Scene scene)
+    {
+        Create();
+    }
+
     public void LoadScene(Scene scene)
     {
         scene.Clear();
-        scene.entities.Clear();
-        scene.Spawn(new Background());
+        Background background = new Background();
+        HeroShip heroShip = new HeroShip();
+        
+        scene.Spawn(heroShip);
+        scene.Spawn(background);
     }
 
     public void Create()
     {
-        Entity entity = new EnemyShip();
-        Entity entity2 = new HeroShip();
-        Entity entity3 = new Background();
+       
     }
     
 }
