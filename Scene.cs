@@ -9,7 +9,7 @@ public class Scene
 {
     public readonly AssetManager assets;
     public readonly SceneLoader loader;
-    private List<Entity> entities;
+    public List<Entity> entities;
     public bool gameOver;
 
     public Scene()
@@ -28,7 +28,7 @@ public class Scene
 
     public void UpdateAll(float deltaTime)
     {
-        loader.Create(this);
+        loader.LoadScene(this);
         for (int i = 0; i < entities.Count; i++)
         {
             Entity entity = entities[i];

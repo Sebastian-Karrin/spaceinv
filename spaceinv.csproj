@@ -20,15 +20,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="assets/*.ttf" />
-    <EmbeddedResource Include="assets/*.ttf">
+    <None Remove="assets/*.png" />
+    <EmbeddedResource Include="assets/*.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="assets/*.png" />
-    <EmbeddedResource Include="assets/*.png">
+    <None Remove="assets/*.ttf" />
+    <EmbeddedResource Include="assets/*.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
