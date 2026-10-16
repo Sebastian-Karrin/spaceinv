@@ -7,16 +7,16 @@ namespace spaceinv;
 
 public class Scene
 {
-    public readonly AssetManager assets;
-    public readonly SceneLoader loader;
+    public readonly AssetManager Assets;
+    public readonly SceneLoader Loader;
     public List<Entity> entities;
     public bool gameOver;
 
     public Scene()
     {
         entities = new List<Entity>();
-        loader = new SceneLoader();
-        assets = new AssetManager();
+        Loader = new SceneLoader();
+        Assets = new AssetManager();
         gameOver = false;
     }
 
@@ -28,7 +28,7 @@ public class Scene
 
     public void UpdateAll(float deltaTime)
     {
-        loader.LoadScene(this);
+        Loader.LoadScene(this);
         for (int i = 0; i < entities.Count; i++)
         {
             Entity entity = entities[i];

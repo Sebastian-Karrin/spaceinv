@@ -22,11 +22,13 @@ public class AssetManager
         {
             return found;
         }
-        string textureName = ($"{AssetPath}/{name}.png");
+        string textureName = ($"assets/{name}.png");
         Texture texture = textures[textureName];
         textures.Add(name, texture);
         return texture;
     }
+    
+    
 
     public Font LoadFont(string name)
     {

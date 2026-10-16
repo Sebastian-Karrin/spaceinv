@@ -17,6 +17,7 @@ public class Background : Entity
     public override void Create(Scene scene)
     {
         base.Create(scene);
+        sprite.Position = new Vector2f(0,0);
     }
     
     public override void Update(Scene scene, float deltaTime)
