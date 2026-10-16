@@ -14,6 +14,7 @@ namespace spaceinv
                 window.Closed += (o, e) => window.Close();
                 Clock clock = new Clock();
                 Scene scene = new Scene();
+                
                 while (window.IsOpen)
                 {
                     window.DispatchEvents();

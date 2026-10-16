@@ -10,4 +10,21 @@ public class EnemyShip : Actor
     {
         
     }
+    
+    public override void Create(Scene scene)
+    {
+        speed = 100.0f;
+        base.Create(scene);
+    }
+    
+    public override void Update(Scene scene, float deltaTime)
+    {
+        base.Update(scene, deltaTime);
+        Position += ToVector(direction) * (speed * deltaTime);
+    }
+    
+    public override void Render(RenderTarget target)
+    {
+        base.Render(target);
+    }
 }

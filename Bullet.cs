@@ -6,5 +6,9 @@ namespace spaceinv;
 
 public class Bullet
 {
+    public Bullet()
+    {
+        
+    }
     
 }
