@@ -31,6 +31,7 @@ public class SceneLoader
 
             
         scene.Spawn(background);
+        scene.Spawn(gui);
         scene.Spawn(heroShip);
         scene.Spawn(enemyShip);
     }

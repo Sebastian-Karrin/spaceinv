@@ -6,9 +6,9 @@ namespace spaceinv;
 
 public class GUI : Entity
 {
-    public GUI() : base("DarkPurple")
+    public GUI() : base("sheet", "kenvector_future_thin")
     {
-        
+        sprite.TextureRect = new IntRect(482, 358, 33, 25);
     }
     
     public override void Create(Scene scene)

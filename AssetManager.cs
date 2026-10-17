@@ -40,8 +40,8 @@ public class AssetManager
             return found;
         }
         
-        string fontName = ($"assets/{name}.txt");
-        Font font = fonts[fontName];
+        string fontName = ($"assets/{name}.ttf");
+        Font font = new Font(fontName);
         fonts.Add(name, font);
         return font;
     }

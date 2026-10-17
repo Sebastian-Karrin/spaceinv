@@ -34,29 +34,47 @@ public class HeroShip : Actor
         base.Render(target);
     }
     
-    protected override int PickDirection(Scene scene) // Rör pacman så länge som den är free
+    protected override int PickDirectionX(Scene scene) // Rör pacman så länge som den är free
     {
-        int dir = direction;
+        int dirX = directionX;
         if (Keyboard.IsKeyPressed(Keyboard.Key.D))
         {
-            dir = 0;
+            dirX = 1;
             isMoving = true;
         }
-        else if (Keyboard.IsKeyPressed(Keyboard.Key.W))
-        {
-            dir = 1;
-            isMoving = true;
-        }
+       
         else if (Keyboard.IsKeyPressed(Keyboard.Key.A))
         {
-            dir = 2;
+            dirX = -1;
             isMoving = true;
         }
+        else if (!Keyboard.IsKeyPressed(Keyboard.Key.D) || !Keyboard.IsKeyPressed(Keyboard.Key.A))
+        {
+            dirX = 0;
+            isMoving = false;
+        }
+        
+        return dirX;
+    }
+    protected override int PickDirectionY(Scene scene) // Rör pacman så länge som den är free
+    {
+        int dirY = directionY;
+        if (Keyboard.IsKeyPressed(Keyboard.Key.W))
+        {
+            dirY = -1;
+            isMoving = true;
+        }
+       
         else if (Keyboard.IsKeyPressed(Keyboard.Key.S))
         {
-            dir = 3;
+            dirY = 1;
             isMoving = true;
         }
-        return dir;
+        else if (!Keyboard.IsKeyPressed(Keyboard.Key.S) || !Keyboard.IsKeyPressed(Keyboard.Key.W))
+        {
+            dirY = 0;
+            isMoving = false;
+        }
+        return dirY;
     }
 }

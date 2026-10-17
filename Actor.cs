@@ -7,22 +7,28 @@ namespace spaceinv;
 public class Actor : Entity
 {
     protected float speed;
-    protected int direction;
+    protected int directionX;
+    protected int directionY;
     public bool shooting;
     public bool isMoving;
     protected Vector2f originalPosition;
     protected Vector2f Velocity;
-    protected static Vector2f ToVector(int dir)
+    protected static Vector2f ToVectorX(int dirX)
     {
-        if (dir==0) return new Vector2f(1, 0); //Höger
-        if (dir==1) return new Vector2f(0, -1); //Upp
-        if (dir==2) return new Vector2f(-1, 0); //Vänster
-        if (dir == 3) return new Vector2f(0,1); //Ner
+        if(dirX == 1) return new Vector2f(1, 0); //Höger
+        if (dirX == -1) return new Vector2f(-1, 0); //Vänster
         return new Vector2f(0, 0); //Stilla, om nåt går fel.
     }
-    protected virtual int PickDirection(Scene scene) { return 4;}
+    protected static Vector2f ToVectorY(int dirY)
+    {
+        if (dirY == 1) return new Vector2f(0, 1); //Ner
+        if (dirY ==-1) return new Vector2f(0, -1); // Upp
+        return new Vector2f(0, 0);
+    }
+    protected virtual int PickDirectionX(Scene scene) { return 0;}
+    protected virtual int PickDirectionY(Scene scene) { return 0;}
     
-    public Actor() : base("sheet")
+    public Actor() : base("sheet", "kenvector_future_thin")
     {
         RenderOrder = 50;
     }
@@ -35,8 +41,9 @@ public class Actor : Entity
     public override void Update(Scene scene, float deltaTime)
     {
         base.Update(scene, deltaTime);
-        direction = PickDirection(scene);
-        Position += ToVector(direction) * (speed * deltaTime);
+        directionX = PickDirectionX(scene);
+        directionY = PickDirectionY(scene);
+        Position += ToVectorX(directionX) * (speed * deltaTime) + ToVectorY(directionY) * (speed * deltaTime);
         /*Position = MathF.Floor(Position.X) switch // om du åker till höger av bannan i tunneln sätts nya positionen till vänster och vice versa
         {
             < 0 => new Vector2f(432, Position.Y),

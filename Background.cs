@@ -14,7 +14,7 @@ public class Background : Entity
     private float scrollSpeedY = 50.0f;
     private Texture backgroundTexture;
     
-    public Background() : base("darkPurple")
+    public Background() : base("darkPurple", "kenvector_future_thin")
     {
         sprite.TextureRect = new IntRect((int)scrollOffsetX,(int)scrollOffsetY, 900,900);
     }

@@ -22,7 +22,7 @@ public class EnemyShip : Actor
     public override void Update(Scene scene, float deltaTime)
     {
         base.Update(scene, deltaTime);
-        Position += ToVector(direction) * (speed * deltaTime);
+        Position += ToVectorX(directionX) + ToVectorY(directionY) * (speed * deltaTime);
     }
     
     public override void Render(RenderTarget target)

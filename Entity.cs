@@ -15,7 +15,7 @@ public class Entity
     public virtual bool Solid => false;
     public int RenderOrder { get; set; } = 0;
 
-    protected Entity(string textureName)
+    protected Entity(string textureName, string fontName)
     {
         this.textureName = textureName;
         this.fontName = fontName;
