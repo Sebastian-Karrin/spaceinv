@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("spaceinv")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dfe770e941b1f56d8e2f6c4641487877c195b586")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e52de1d978ff063ffaf3dbc4b2534d45be4e0d5b")]
 [assembly: System.Reflection.AssemblyProductAttribute("spaceinv")]
 [assembly: System.Reflection.AssemblyTitleAttribute("spaceinv")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

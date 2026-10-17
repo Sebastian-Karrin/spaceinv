@@ -15,6 +15,10 @@ namespace spaceinv
                 window.Closed += (o, e) => window.Close();
                 Clock clock = new Clock();
                 Scene scene = new Scene();
+                window.SetView(new View(
+                    new Vector2f(400,400),
+                    new Vector2f(800,800)
+                ));
                 scene.Loader.LoadScene(scene);
                 while (window.IsOpen)
                 {

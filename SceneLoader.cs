@@ -23,11 +23,16 @@ public class SceneLoader
     public void LoadScene(Scene scene)
     {
         scene.Clear();
-        Background background = new Background();
         HeroShip heroShip = new HeroShip();
-        
-        scene.Spawn(heroShip);
+        EnemyShip enemyShip = new EnemyShip();
+        Bullet bullet = new Bullet();
+        GUI gui = new GUI();
+        Background background = new Background();
+
+            
         scene.Spawn(background);
+        scene.Spawn(heroShip);
+        scene.Spawn(enemyShip);
     }
 
     public void Create()

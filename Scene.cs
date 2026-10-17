@@ -45,6 +45,7 @@ public class Scene
 
     public void RenderAll(RenderTarget target)
     {
+        
         for (int i = 0; i < entities.Count; i++)
         {
             entities[i].Render(target);

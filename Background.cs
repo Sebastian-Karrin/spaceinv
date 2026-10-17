@@ -8,27 +8,41 @@ namespace spaceinv;
 public class Background : Entity
 {
     public Vector2f direction = new Vector2f(0, 1);
+    private float scrollOffsetX = 0f;
+    private float scrollOffsetY = 0f;
+    private float scrollSpeedX = 50.0f;
+    private float scrollSpeedY = 50.0f;
+    private Texture backgroundTexture;
     
     public Background() : base("darkPurple")
     {
-        
+        sprite.TextureRect = new IntRect((int)scrollOffsetX,(int)scrollOffsetY, 900,900);
     }
     
     public override void Create(Scene scene)
     {
+        direction = new Vector2f(0, 0.1f);
+        RenderOrder = 0;
         base.Create(scene);
-        sprite.Position = new Vector2f(0,0);
+        sprite.Position = new Vector2f(0,-100);
     }
     
     public override void Update(Scene scene, float deltaTime)
     {
-        base.Update(scene, deltaTime);
+        Position += new Vector2f(0, 0.1f);
+        scrollOffsetX += scrollSpeedX * deltaTime;
+        scrollOffsetX %= 512;
+        scrollOffsetY += scrollSpeedY * deltaTime;
+        scrollOffsetY %= 512;
         Loop(scene);
+        base.Update(scene, deltaTime);
+        
     }
     
     public override void Render(RenderTarget target)
     {
         base.Render(target);
+        
     }
 
     public void Loop(Scene scene)

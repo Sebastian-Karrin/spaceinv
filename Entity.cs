@@ -13,6 +13,7 @@ public class Entity
     public FloatRect Bounds =>sprite.GetGlobalBounds();
     public Vector2f Position { get => sprite.Position; set => sprite.Position = value; }
     public virtual bool Solid => false;
+    public int RenderOrder { get; set; } = 0;
 
     protected Entity(string textureName)
     {

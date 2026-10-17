@@ -1,7 +1,8 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
 using SFML.Graphics;
-using static SFML.Window.Keyboard.Key;
+using SFML.System;
+
 
 
 namespace spaceinv;
@@ -10,20 +11,22 @@ public class HeroShip : Actor
 {
     public HeroShip() : base()
     {
-        
+        sprite.TextureRect = new IntRect(112, 792, 112, 76);
+        sprite.Origin = new Vector2f(56, 38);
     }
     
     public override void Create(Scene scene)
     {
-        speed = 100.0f;
+        sprite.Position = new Vector2f(450, 450);
+        speed = 300.0f;
         base.Create(scene);    
     }
     
     public override void Update(Scene scene, float deltaTime)
     {
+       
         base.Update(scene, deltaTime);
-        Position += ToVector(direction) * (speed * deltaTime);
-        
+
     }
     
     public override void Render(RenderTarget target)
@@ -34,26 +37,26 @@ public class HeroShip : Actor
     protected override int PickDirection(Scene scene) // Rör pacman så länge som den är free
     {
         int dir = direction;
-        if (Keyboard.IsKeyPressed(Right))
+        if (Keyboard.IsKeyPressed(Keyboard.Key.D))
         {
             dir = 0;
             isMoving = true;
         }
-        else if (Keyboard.IsKeyPressed(Up))
+        else if (Keyboard.IsKeyPressed(Keyboard.Key.W))
         {
             dir = 1;
             isMoving = true;
         }
-        else if (Keyboard.IsKeyPressed(Left))
+        else if (Keyboard.IsKeyPressed(Keyboard.Key.A))
         {
             dir = 2;
             isMoving = true;
         }
-        else if (Keyboard.IsKeyPressed(Down))
+        else if (Keyboard.IsKeyPressed(Keyboard.Key.S))
         {
             dir = 3;
             isMoving = true;
         }
-        return direction;
+        return dir;
     }
 }

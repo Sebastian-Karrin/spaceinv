@@ -26,6 +26,7 @@ public class AssetManager
         }
         string textureName = ($"assets/{name}.png");
         Texture texture = new Texture(textureName);
+        texture.Repeated = true;
         textures.Add(name, texture);
         return texture;
     }
