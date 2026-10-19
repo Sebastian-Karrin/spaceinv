@@ -16,8 +16,8 @@ namespace spaceinv
                 Clock clock = new Clock();
                 Scene scene = new Scene();
                 window.SetView(new View(
-                    new Vector2f(400,400),
-                    new Vector2f(800,800)
+                    new Vector2f(450,450),
+                    new Vector2f(900,900)
                 ));
                 scene.Loader.LoadScene(scene);
                 while (window.IsOpen)
