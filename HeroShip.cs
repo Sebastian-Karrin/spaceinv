@@ -11,6 +11,7 @@ public class HeroShip : Actor
 {
     public readonly Bullet bullet;
     private float bulletTimer;
+    
     public HeroShip() : base()
     {
         sprite.TextureRect = new IntRect(112, 792, 112, 76);
@@ -29,10 +30,12 @@ public class HeroShip : Actor
     {
         bulletTimer = MathF.Max(bulletTimer - deltaTime, 0.0f);
         base.Update(scene, deltaTime);
-        if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && bulletTimer < 0.5)
+        if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && bulletTimer < 0.25)
         {
-            bulletTimer = 1.0f;
+            bulletTimer = 0.5f;
             bullet.HeroBullet(scene,this);
+            bullet.isFromEnemy = false;
+            bullet.IsFromHero = true;
         }
 
     }
@@ -43,16 +46,15 @@ public class HeroShip : Actor
         
     }
     
-    protected override int PickDirectionX(Scene scene) // Rör pacman så länge som den är free
+    protected override int PickDirectionX(Scene scene)
     {
         int dirX = directionX;
-        if (Keyboard.IsKeyPressed(Keyboard.Key.D))
+        if (Keyboard.IsKeyPressed(Keyboard.Key.D) && sprite.Position.X < 844)
         {
             dirX = 1;
             isMoving = true;
         }
-       
-        else if (Keyboard.IsKeyPressed(Keyboard.Key.A))
+        else if (Keyboard.IsKeyPressed(Keyboard.Key.A)  && sprite.Position.X > 56)
         {
             dirX = -1;
             isMoving = true;
@@ -62,19 +64,17 @@ public class HeroShip : Actor
             dirX = 0;
             isMoving = false;
         }
-        
         return dirX;
     }
-    protected override int PickDirectionY(Scene scene) // Rör pacman så länge som den är free
+    protected override int PickDirectionY(Scene scene)
     {
         int dirY = directionY;
-        if (Keyboard.IsKeyPressed(Keyboard.Key.W))
+        if (Keyboard.IsKeyPressed(Keyboard.Key.W) && sprite.Position.Y > 38)
         {
             dirY = -1;
             isMoving = true;
         }
-       
-        else if (Keyboard.IsKeyPressed(Keyboard.Key.S))
+        else if (Keyboard.IsKeyPressed(Keyboard.Key.S) && sprite.Position.Y < 862)
         {
             dirY = 1;
             isMoving = true;

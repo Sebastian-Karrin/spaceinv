@@ -12,6 +12,7 @@ public class Scene
     public readonly EventHandler Event;
     public List<Entity> entities;
     public bool gameOver;
+    public float spawnTimer;
 
     public Scene()
     {
@@ -29,6 +30,13 @@ public class Scene
 
     public void UpdateAll(float deltaTime)
     {
+        spawnTimer = MathF.Max(spawnTimer - deltaTime, 0.0f);
+        
+        if (spawnTimer < 1.0f)
+        {
+            spawnTimer = 10.0f;
+            Loader.EnemyShipSpawner(this);
+        }
         for (int i = entities.Count - 1; i >= 0; i--)
         {
             Entity entity = entities[i];

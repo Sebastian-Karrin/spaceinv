@@ -12,7 +12,6 @@ public class Actor : Entity
     public bool shooting;
     public bool isMoving;
     protected Vector2f originalPosition;
-    protected Vector2f Velocity;
     protected static Vector2f ToVectorX(int dirX)
     {
         if(dirX == 1) return new Vector2f(1, 0); //Höger
@@ -30,7 +29,7 @@ public class Actor : Entity
     
     public Actor() : base("sheet", "kenvector_future_thin")
     {
-        RenderOrder = 50;
+        
     }
 
     public override void Create(Scene scene)

@@ -22,7 +22,6 @@ public class Background : Entity
     public override void Create(Scene scene)
     {
         direction = new Vector2f(0, 0.1f);
-        RenderOrder = 0;
         base.Create(scene);
         sprite.Position = new Vector2f(0,-100);
     }

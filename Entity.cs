@@ -10,11 +10,12 @@ public class Entity
     private readonly string fontName;
     protected readonly Sprite sprite;
     public bool isDead = false;
+    public virtual bool Solid => false;
+
     public FloatRect Bounds =>sprite.GetGlobalBounds();
     public Vector2f Position { get => sprite.Position; set => sprite.Position = value; }
-    public virtual bool Solid => false;
-    public int RenderOrder { get; set; } = 0;
-
+    protected Vector2f Velocity;
+    
     protected Entity(string textureName, string fontName)
     {
         this.textureName = textureName;
