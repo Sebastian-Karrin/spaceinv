@@ -7,10 +7,14 @@ namespace spaceinv;
 
 public class EnemyShip : Actor
 {
+    public readonly Bullet bullet;
+    private float bulletTimer;
+
     public EnemyShip() : base()
     {
         sprite.TextureRect = new IntRect(144, 156, 104, 84);
         sprite.Origin = new Vector2f(52,42);
+        bullet = new Bullet();
     }
     
     public override void Create(Scene scene)
@@ -22,9 +26,15 @@ public class EnemyShip : Actor
     
     public override void Update(Scene scene, float deltaTime)
     {
+        bulletTimer = MathF.Max(bulletTimer - deltaTime, 0.0f);
+
         base.Update(scene, deltaTime);
         Position += ToVectorX(directionX) * (speed * deltaTime) + ToVectorY(directionY) * ((speed / 5) * deltaTime);
-       
+        if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && bulletTimer < 0.5)
+        {
+            bulletTimer = 1.0f;
+            bullet.EnemyBullet(scene,this);
+        }
     }
     
     public override void Render(RenderTarget target)
@@ -64,4 +74,13 @@ public class EnemyShip : Actor
         }
         return dirY;
     }
+
+    protected virtual void CollideWith(Scene scene, Entity e)
+    {
+        if (e is HeroShip)
+        {
+            sprite.Position = new Vector2f(100, 100);
+        }
+    }
+
 }

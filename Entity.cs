@@ -30,6 +30,10 @@ public class Entity
 
     public virtual void Update(Scene scene, float deltaTime)
     {
+        foreach (Entity found in scene.FindIntersects(Bounds))
+        {
+            CollideWith(scene, found);
+        }
     }
 
     public virtual void Render(RenderTarget target)
@@ -41,6 +45,9 @@ public class Entity
     {
         
     }
+    
+    protected virtual void CollideWith(Scene scene, Entity other){}
+
     
     
 }

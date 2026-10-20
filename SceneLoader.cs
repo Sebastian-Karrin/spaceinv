@@ -25,7 +25,6 @@ public class SceneLoader
         scene.Clear();
         HeroShip heroShip = new HeroShip();
         EnemyShip enemyShip = new EnemyShip();
-        Bullet bullet = new Bullet();
         GUI gui = new GUI();
         Background background = new Background();
 

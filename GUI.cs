@@ -1,6 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
 using SFML.Graphics;
+using SFML.System;
 
 namespace spaceinv;
 
@@ -31,5 +32,14 @@ public class GUI : Entity
     public override void Render(RenderTarget target)
     {
         base.Render(target);
+        sprite.Position = new Vector2f(450, 850);
+        for (int i = 0; i < maxHealth; i++)
+        {
+            sprite.TextureRect = i < currentHealth
+                ? new IntRect(482, 358, 33, 25)
+                : new IntRect(797, 174, 30, 32);
+            base.Render(target);
+            sprite.Position += new Vector2f(33, 0);
+        }
     }
 }

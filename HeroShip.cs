@@ -9,10 +9,13 @@ namespace spaceinv;
 
 public class HeroShip : Actor
 {
+    public readonly Bullet bullet;
+    private float bulletTimer;
     public HeroShip() : base()
     {
         sprite.TextureRect = new IntRect(112, 792, 112, 76);
         sprite.Origin = new Vector2f(56, 38);
+        bullet = new Bullet();
     }
     
     public override void Create(Scene scene)
@@ -24,14 +27,20 @@ public class HeroShip : Actor
     
     public override void Update(Scene scene, float deltaTime)
     {
-       
+        bulletTimer = MathF.Max(bulletTimer - deltaTime, 0.0f);
         base.Update(scene, deltaTime);
+        if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && bulletTimer < 0.5)
+        {
+            bulletTimer = 1.0f;
+            bullet.HeroBullet(scene,this);
+        }
 
     }
     
     public override void Render(RenderTarget target)
     {
         base.Render(target);
+        
     }
     
     protected override int PickDirectionX(Scene scene) // Rör pacman så länge som den är free
@@ -77,4 +86,10 @@ public class HeroShip : Actor
         }
         return dirY;
     }
+
+    protected virtual void CollideWith(Scene scene, Entity e)
+    {
+        
+    }
+
 }

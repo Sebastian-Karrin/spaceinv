@@ -9,6 +9,7 @@ public class Scene
 {
     public readonly AssetManager Assets;
     public readonly SceneLoader Loader;
+    public readonly EventHandler Event;
     public List<Entity> entities;
     public bool gameOver;
 
@@ -28,19 +29,18 @@ public class Scene
 
     public void UpdateAll(float deltaTime)
     {
-        
         for (int i = entities.Count - 1; i >= 0; i--)
         {
             Entity entity = entities[i];
             entity.Update(this, deltaTime);
         }
-        
         for (int i = 0; i < entities.Count; i++)
         {
             Entity entity = entities[i];
             if (entity.isDead) entities.RemoveAt(i);
             else i++;
         }
+       
     }
 
     public void RenderAll(RenderTarget target)
