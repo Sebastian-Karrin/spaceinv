@@ -12,7 +12,7 @@ public class Bullet : Entity
 
     private List<Bullet> hBullets;
     private List<Bullet> eBullets;
-    /*private Sprite _sprite;*/
+    private Sprite _sprite;
     
     public bool IsFromHero { get; set; } = false;
     public bool isFromEnemy { get; set; } = false;
@@ -20,10 +20,10 @@ public class Bullet : Entity
     
     public Bullet() : base("sheet", "kenvector_future_thin")
     {
-        /*_sprite = new Sprite();
+        _sprite = new Sprite(sprite);
         _sprite.Texture = new Texture("assets/sheet.png");
-        _sprite.TextureRect = new IntRect(856, 421, 9, 58);*/
-        sprite.TextureRect = new IntRect(856, 984, 10, 54);
+        _sprite.TextureRect = new IntRect(856, 984, 9, 54);
+        sprite.TextureRect = new IntRect(856, 421, 9, 54);
         sprite.Position = new Vector2f(450, 450);
        hBullets = new List<Bullet>();
        eBullets = new List<Bullet>();
@@ -52,9 +52,9 @@ public class Bullet : Entity
         {
             if (isFromEnemy = true)
             {
-                var newEPos = sprite.Position;
+                var newEPos = _sprite.Position;
                 newEPos += new Vector2f(0, 1) * deltaTime * 300.0f;
-                sprite.Position = newEPos;
+                _sprite.Position = newEPos;
                 return;
             }
         }
@@ -94,6 +94,7 @@ public class Bullet : Entity
     {
         isFromEnemy = true;
         Bullet enemyBullet =  new Bullet(); 
+        
         scene.Spawn(enemyBullet);
         eBullets.Add(enemyBullet);
         enemyBullet.Position = new Vector2f(enemyShip.Position.X, enemyShip.Position.Y);
