@@ -10,8 +10,9 @@ public class Bullet : Entity
     private Vector2f herodirection = new Vector2f(0, -1);
     private Vector2f enemydirection = new Vector2f(0, 1);
 
-    private List<Entity> hBullets;
-    private List<Entity> eBullets;
+    private List<Bullet> hBullets;
+    private List<Bullet> eBullets;
+    /*private Sprite _sprite;*/
     
     public bool IsFromHero { get; set; } = false;
     public bool isFromEnemy { get; set; } = false;
@@ -19,10 +20,13 @@ public class Bullet : Entity
     
     public Bullet() : base("sheet", "kenvector_future_thin")
     {
-        sprite.TextureRect = new IntRect(856, 421, 9, 54);
+        /*_sprite = new Sprite();
+        _sprite.Texture = new Texture("assets/sheet.png");
+        _sprite.TextureRect = new IntRect(856, 421, 9, 58);*/
+        sprite.TextureRect = new IntRect(856, 984, 10, 54);
         sprite.Position = new Vector2f(450, 450);
-       hBullets = new List<Entity>();
-       eBullets = new List<Entity>();
+       hBullets = new List<Bullet>();
+       eBullets = new List<Bullet>();
     }
 
     public override void Create(Scene scene)
@@ -74,6 +78,7 @@ public class Bullet : Entity
 
     public void HeroBullet(Scene scene,HeroShip heroShip)
     {
+        
         IsFromHero = true;
         Bullet heroBullet1 = new Bullet();
         Bullet heroBullet2 = new Bullet();
