@@ -7,9 +7,10 @@ namespace spaceinv;
 
 public class GUI : Entity
 {
-    private Text scoreText;
     private int maxHealth;
     private int currentHealth;
+    
+    private Text scoreText;
     private int currentScore;
     
     public GUI() : base("sheet", "kenvector_future_thin")
@@ -20,8 +21,14 @@ public class GUI : Entity
     
     public override void Create(Scene scene)
     {
+        
         currentHealth = maxHealth;
         scene.LoseHealth += OnLoseHealth;
+
+        scoreText = new Text();
+        scoreText.Color = Color.White;
+        scene.ScoreGained += OnGainScore;
+        
         base.Create(scene);
     }
     
@@ -32,6 +39,7 @@ public class GUI : Entity
     public override void Render(RenderTarget target)
     {
         base.Render(target);
+        
         sprite.Position = new Vector2f(450, 850);
         for (int i = 0; i < maxHealth; i++)
         {
@@ -40,6 +48,12 @@ public class GUI : Entity
                 : new IntRect(797, 174, 30, 32);
             base.Render(target);
             sprite.Position += new Vector2f(33, 0);
+        }
+        if (currentHealth <= 0)
+        {
+            scoreText.DisplayedString = $"Score: {currentScore}";
+            scoreText.Position = new Vector2f(450, 450);
+            target.Draw(scoreText);
         }
     }
 
@@ -50,6 +64,15 @@ public class GUI : Entity
         {
             scene.gameOver = true;
             scene.LoseHealth -= OnLoseHealth;
+        }
+    }
+    
+    private void OnGainScore(Scene scene, int score)
+    {
+        currentScore += score;
+        if (currentHealth <= 0)
+        {
+            scene.ScoreGained -= OnGainScore;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using System.Diagnostics;
+using SFML.Graphics;
 using SFML.Window;
 using SFML.Graphics;
 using SFML.System;
@@ -10,6 +11,9 @@ public class EnemyShip : Actor
     public readonly Bullet bullet;
     private float bulletTimer;
     private Vector2f originalPosition;
+    private Clock spawnClock = new Clock();
+    private float spawnTimer;
+    private float spawnclock;
 
     public EnemyShip() : base()
     {
@@ -29,7 +33,8 @@ public class EnemyShip : Actor
     public override void Update(Scene scene, float deltaTime)
     {
         bulletTimer = MathF.Max(bulletTimer - deltaTime, 0.0f);
-
+        spawnTimer = MathF.Max(spawnTimer - deltaTime, 0.0f);
+        
         base.Update(scene, deltaTime);
         if (!isDead)
         {
@@ -37,7 +42,12 @@ public class EnemyShip : Actor
             if (bulletTimer < 0.3)
             {
                 bulletTimer = 1.0f;
-                bullet.EnemyBullet(scene,this);
+                Random random = new Random();
+                if (random.Next(0, 100) < 60)
+                {
+                    bullet.EnemyBullet(scene,this);
+                }
+                
             }
         }
         Position = MathF.Floor(Position.Y) switch
@@ -45,6 +55,7 @@ public class EnemyShip : Actor
            > 942 => new Vector2f(Position.X, -42),
            _ => Position
        };
+
     }
     
     public override void Render(RenderTarget target)
@@ -102,19 +113,14 @@ public class EnemyShip : Actor
 
     protected override void CollideWith(Scene scene, Entity e)
     {
-        if (e is HeroShip)
-        {
-            e.isDead = true;
-        }
-
         if (e is Bullet)
         {
-            if (bullet.IsFromHero)
-            {
-                isDead = true;
-                Destroy(scene);
-            }
+            
         }
+    }
+
+    private void Spawner(Scene scene)
+    {
     }
 
 }

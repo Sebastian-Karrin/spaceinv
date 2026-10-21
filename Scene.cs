@@ -11,12 +11,21 @@ public class Scene
     public readonly AssetManager Assets;
     public readonly SceneLoader Loader;
     public readonly EventHandler Event;
+    
     public List<Entity> entities;
-    public bool gameOver;
-    public float spawnTimer;
+    
     public event ValueChangeEvent LoseHealth;
     public int lostHealth;
+
+    public event ValueChangeEvent ScoreGained;
+    public int scoreGained;
+
+    public bool gameOver;
+    public float spawnTimer;
+    
     public void PublishLostHealth(int amount) => lostHealth += amount;
+    public void PublishScoreGained(int amount) => scoreGained += amount;
+    
 
 
     public Scene()
@@ -35,13 +44,7 @@ public class Scene
 
     public void UpdateAll(float deltaTime)
     {
-        spawnTimer = MathF.Max(spawnTimer - deltaTime, 0.0f);
-        
-        if (spawnTimer < 1.0f)
-        {
-            spawnTimer = 10.0f;
-            Loader.EnemyShipSpawner(this);
-        }
+
         for (int i = entities.Count - 1; i >= 0; i--)
         {
             Entity entity = entities[i];
@@ -57,6 +60,12 @@ public class Scene
         {
             LoseHealth?.Invoke(this ,lostHealth);
             lostHealth = 0;
+        }
+
+        if (scoreGained != 0)
+        {
+            ScoreGained?.Invoke (this, scoreGained);
+            scoreGained = 0;
         }
 
     }

@@ -18,21 +18,22 @@ public class SceneLoader
     public void LoadScene(Scene scene)
     {
         scene.Clear();
-        HeroShip heroShip = new HeroShip();
         GUI gui = new GUI();
+        HeroShip heroShip = new HeroShip();
+        EnemyShip enemyShip = new EnemyShip();
         Background background = new Background();
 
             
         scene.Spawn(background);
-        scene.Spawn(gui);
+        scene.Spawn(enemyShip);
         scene.Spawn(heroShip);
+        scene.Spawn(gui);
+        
     }
 
     public void EnemyShipSpawner(Scene scene)
     {
-        EnemyShip enemyShip = new EnemyShip();
-        scene.Spawn(enemyShip);
-        /*if (scene.spawnTimer < 1.0f)
+        if (scene.spawnTimer < 1.0f)
         {
             scene.spawnTimer = 10.0f;
             for (float i = scene.spawnTimer; i >= 2; i--)
@@ -45,7 +46,13 @@ public class SceneLoader
                 }
                
             }
-        }*/
+        }
+    }
+
+    public void EnemySpawner(Scene scene)
+    {
+        EnemyShip enemyShip = new EnemyShip();
+        scene.Spawn(enemyShip);
     }
     
 }

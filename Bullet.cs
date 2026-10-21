@@ -7,14 +7,10 @@ namespace spaceinv;
 
 public class Bullet : Entity
 {
-    private Vector2f herodirection = new Vector2f(0, -1);
-    private Vector2f enemydirection = new Vector2f(0, 1);
-
     private List<Bullet> hBullets;
     private List<Bullet> eBullets;
     private Sprite _sprite;
-    public bool IsFromHero { get; set; } = false;
-    public bool isFromEnemy { get; set; } = false;
+    public Vector2f bulletDirection;
     
     
     public Bullet() : base("sheet", "kenvector_future_thin")
@@ -36,29 +32,9 @@ public class Bullet : Entity
     public override void Update(Scene scene, float deltaTime)
     {
         base.Update(scene, deltaTime);
-        foreach (var hBullet in hBullets)
-        {
-            if(IsFromHero)
-            {
-                var newEPos = sprite.Position;
-                newEPos += herodirection * deltaTime * 300.0f;
-                sprite.Position = newEPos;
-                return;
-            }
-        }
-
-        foreach (var eBullet in eBullets)
-        {
-            if (isFromEnemy = true)
-            {
-                var newEPos = _sprite.Position;
-                newEPos += enemydirection * deltaTime * 300.0f;
-                _sprite.Position = newEPos;
-                
-                return;
-            }
-        }
-
+        var newPos = sprite.Position;
+        newPos += bulletDirection * deltaTime * 300.0f;
+        sprite.Position = newPos;
     }
     
     public override void Render(RenderTarget target)
@@ -78,8 +54,7 @@ public class Bullet : Entity
 
     public void HeroBullet(Scene scene,HeroShip heroShip)
     {
-        
-        IsFromHero = true;
+        bulletDirection = new Vector2f(0, -1);
         Bullet heroBullet1 = new Bullet();
         Bullet heroBullet2 = new Bullet();
         scene.Spawn(heroBullet1);
@@ -92,9 +67,8 @@ public class Bullet : Entity
 
     public void EnemyBullet(Scene scene, EnemyShip enemyShip)
     {
-        isFromEnemy = true;
+        bulletDirection = new Vector2f(0, 1);
         Bullet enemyBullet =  new Bullet(); 
-        
         scene.Spawn(enemyBullet);
         eBullets.Add(enemyBullet);
         enemyBullet.Position = new Vector2f(enemyShip.Position.X, enemyShip.Position.Y);

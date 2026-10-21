@@ -11,6 +11,9 @@ public class HeroShip : Actor
 {
     public readonly Bullet bullet;
     private float bulletTimer;
+    private float immunityTimer;
+    public Clock scoreClock;
+    private float scoreTimestamp;
 
     
     public HeroShip() : base()
@@ -25,9 +28,11 @@ public class HeroShip : Actor
     
     public override void Create(Scene scene)
     {
+        scoreClock = new Clock();
         sprite.Position = originalPosition;
         base.Create(scene);
         scene.LoseHealth += OnLoseHealth;
+        scene.ScoreGained += OnGainScore;
     }
     
     public override void Update(Scene scene, float deltaTime)
@@ -35,14 +40,16 @@ public class HeroShip : Actor
         if (!scene.gameOver)
         {
             bulletTimer = MathF.Max(bulletTimer - deltaTime, 0.0f);
+            immunityTimer = MathF.Max(immunityTimer - deltaTime, 0.0f);
         
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && bulletTimer < 0.25)
             {
                 bulletTimer = 0.5f;
                 bullet.HeroBullet(scene,this);
-                bullet.isFromEnemy = false;
-                bullet.IsFromHero = true;
             }
+
+            if (immunityTimer > 0.0f) sprite.Color = new Color(255, 255, 255,50);
+            else sprite.Color = Color.White;
             
             base.Update(scene, deltaTime);
         }
@@ -58,6 +65,7 @@ public class HeroShip : Actor
     {
         base.Destroy(scene);
         scene.LoseHealth -= OnLoseHealth;
+        scene.ScoreGained -= OnGainScore;
     }
     
     protected override int PickDirectionX(Scene scene)
@@ -106,6 +114,7 @@ public class HeroShip : Actor
         if (e is EnemyShip)
         {
             scene.PublishLostHealth(1);
+            immunityTimer = 2.0f;
             e.isDead = true;
         }
     }
@@ -113,6 +122,17 @@ public class HeroShip : Actor
     private void OnLoseHealth(Scene scene, int amount)
     {
         Reset();
+    }
+
+    private void OnGainScore(Scene scene, int amount)
+    {
+        scoreTimestamp = scoreClock.ElapsedTime.AsSeconds();
+        if (scoreClock.ElapsedTime.AsSeconds() > scoreTimestamp + 1.0f)
+        {
+            scene.PublishScoreGained(10);
+            scoreClock.Restart();
+        }
+        
     }
 
 }
