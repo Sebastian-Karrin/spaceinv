@@ -116,6 +116,7 @@ public class HeroShip : Actor
         {
             scene.PublishLostHealth(1);
             immunityTimer = 2.0f;
+            e.isDead = true;
         }
     }
     

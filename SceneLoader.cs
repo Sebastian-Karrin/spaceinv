@@ -19,6 +19,7 @@ public class SceneLoader
     {
         scene.Clear();
         GUI gui = new GUI();
+        Explosion explosion = new Explosion();
         HeroShip heroShip = new HeroShip();
         EnemyShip enemyShip = new EnemyShip();
         Background background = new Background();

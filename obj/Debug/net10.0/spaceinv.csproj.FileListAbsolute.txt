@@ -83,3 +83,4 @@ C:\Users\bebbe\Documents\GitHub\spaceinv\obj\Debug\net10.0\refint\spaceinv.dll
 C:\Users\bebbe\Documents\GitHub\spaceinv\obj\Debug\net10.0\spaceinv.pdb
 C:\Users\bebbe\Documents\GitHub\spaceinv\obj\Debug\net10.0\spaceinv.genruntimeconfig.cache
 C:\Users\bebbe\Documents\GitHub\spaceinv\obj\Debug\net10.0\ref\spaceinv.dll
+C:\Users\bebbe\Documents\GitHub\spaceinv\bin\Debug\net10.0\assets\Explosion Medium.png

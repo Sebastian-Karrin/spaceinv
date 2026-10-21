@@ -8,7 +8,8 @@ namespace spaceinv;
 
 public class EnemyShip : Actor
 {
-    public readonly Bullet bullet;
+    public readonly Bullet Bullet;
+    public readonly Explosion Explosion;
     private float bulletTimer;
     private Vector2f originalPosition;
     private Clock spawnClock = new Clock();
@@ -19,7 +20,8 @@ public class EnemyShip : Actor
     {
         sprite.TextureRect = new IntRect(144, 156, 104, 84);
         sprite.Origin = new Vector2f(52,42);
-        bullet = new Bullet();
+        Bullet = new Bullet();
+        Explosion = new Explosion();
         originalPosition = new Vector2f(new Random().Next(10,890), -50);
     }
     
@@ -45,22 +47,29 @@ public class EnemyShip : Actor
                 Random random = new Random();
                 if (random.Next(0, 100) < 60)
                 {
-                    bullet.EnemyBullet(scene,this);
+                    Bullet.EnemyBullet(scene,this);
                 }
                 
             }
+            Position = MathF.Floor(Position.Y) switch
+            {
+                > 942 => new Vector2f(Position.X, -42),
+                _ => Position
+            }; 
         }
-        Position = MathF.Floor(Position.Y) switch
-       {
-           > 942 => new Vector2f(Position.X, -42),
-           _ => Position
-       };
+        else
+        {
+            scene.Spawn(Explosion);
+            Explosion.Location(scene, this);
+        }
+       
 
     }
     
     public override void Render(RenderTarget target)
     {
         base.Render(target);
+       
     }
 
     public override void Destroy(Scene scene)
