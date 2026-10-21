@@ -29,46 +29,38 @@ public class Explosion : Entity
         frames.Add(frame4);
         frames.Add(frame5);
         frames.Add(frame6);
-        
-        sprite.Scale = new Vector2f(5.0f, 5.0f);
+        sprite.Scale = new Vector2f(2.0f, 2.0f);
     }
     
     public override void Create(Scene scene)
     {
         base.Create(scene);
-       
     }
     public override void Update(Scene scene, float deltaTime)
     {
         aniTimer = MathF.Max(aniTimer - deltaTime, 0.0f);
+        
+        /*if(frames.Count > 0)
+        {
             if (aniTimer >= delay)
             {
                 currentFrame++;
                 aniTimer = 0.0f;
             }
-         base.Update(scene, deltaTime);
-
+            base.Update(scene, deltaTime);
+        }*/
+        base.Update(scene, deltaTime);
     }
     
     public override void Render(RenderTarget target)
     {
         base.Render(target);
-
-        if (frames.Count > 0)
+        /*if (frames.Count > 0)
         {
             sprite.TextureRect = frames[currentFrame];
+            aniTimer = 0.2f;
         }
-
-        foreach (var frame in frames)
-        {
-            if (aniTimer < 0.1f)
-            {
-                Console.WriteLine($"{frame}");
-                sprite.TextureRect = frame;
-                aniTimer = 0.15f;
-            }
-        }
-        
+        target.Draw(sprite);*/
         
     }
     public override void Destroy(Scene scene)
@@ -78,11 +70,19 @@ public class Explosion : Entity
 
     public void Location(Scene scene, EnemyShip enemyShip)
     {
-        sprite.Position = new Vector2f(enemyShip.Position.X / 5.0f, enemyShip.Position.Y / 5.0f);
+        sprite.Position = new Vector2f(enemyShip.Position.X, enemyShip.Position.Y);
     }
 
     public void Animation()
     {
-        
+        while (currentFrame < frames.Count)
+        {
+            if (aniTimer < delay)
+            {
+                sprite.TextureRect =  frames[currentFrame];
+                currentFrame++;
+                aniTimer = 1f;
+            }
+        }
     }
 }

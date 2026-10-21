@@ -57,11 +57,11 @@ public class EnemyShip : Actor
                 _ => Position
             }; 
         }
-        else
+        /*else
         {
             scene.Spawn(Explosion);
             Explosion.Location(scene, this);
-        }
+        }*/
        
 
     }
