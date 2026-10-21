@@ -17,6 +17,8 @@ public class GUI : Entity
     {
         sprite.TextureRect = new IntRect(482, 358, 33, 25);
         maxHealth = 3;
+        scoreText = new Text();
+        scoreText.Color = Color.White;
     }
     
     public override void Create(Scene scene)
@@ -24,9 +26,6 @@ public class GUI : Entity
         
         currentHealth = maxHealth;
         scene.LoseHealth += OnLoseHealth;
-
-        scoreText = new Text();
-        scoreText.Color = Color.White;
         scene.ScoreGained += OnGainScore;
         
         base.Create(scene);

@@ -41,7 +41,8 @@ public class HeroShip : Actor
         {
             bulletTimer = MathF.Max(bulletTimer - deltaTime, 0.0f);
             immunityTimer = MathF.Max(immunityTimer - deltaTime, 0.0f);
-        
+
+            OnGainScore(scene, 10);
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && bulletTimer < 0.25)
             {
                 bulletTimer = 0.5f;
@@ -115,7 +116,6 @@ public class HeroShip : Actor
         {
             scene.PublishLostHealth(1);
             immunityTimer = 2.0f;
-            e.isDead = true;
         }
     }
     

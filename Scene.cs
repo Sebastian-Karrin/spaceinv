@@ -67,7 +67,7 @@ public class Scene
             ScoreGained?.Invoke (this, scoreGained);
             scoreGained = 0;
         }
-
+        
     }
 
     public void RenderAll(RenderTarget target)

@@ -31,6 +31,11 @@ public class SceneLoader
         
     }
 
+    public void Reload(Scene scene)
+    {
+        LoadScene(scene);
+    }
+
     public void EnemyShipSpawner(Scene scene)
     {
         if (scene.spawnTimer < 1.0f)
