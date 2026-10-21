@@ -6,21 +6,16 @@ using spaceinv;
 
 namespace spaceinv;
 
-public delegate void ValueChangeEvent(int value);
 
 public class EventHandler
 {
-    public event ValueChangeEvent LoseHealth;
-    public int lostHealth;
-    public void PublishLostHealth(int amount) => lostHealth += amount;
+   
+    
 
-    public void InvokeEvent(Scene scene)
+    public void InvokeEvent(Scene scene, int value)
     {
-        if (lostHealth != 0)
-        {
-            LoseHealth?.Invoke(lostHealth);
-            lostHealth = 0;
-        }
+       
+           
     }
 }
 

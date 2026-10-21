@@ -16,14 +16,15 @@ public class Background : Entity
     
     public Background() : base("darkPurple", "kenvector_future_thin")
     {
-        sprite.TextureRect = new IntRect((int)scrollOffsetX,(int)scrollOffsetY, 900,900);
+        sprite.TextureRect = new IntRect((int)scrollOffsetX,(int)scrollOffsetY, 900,1800);
+        sprite.Origin = new Vector2f(0, 900);
     }
     
     public override void Create(Scene scene)
     {
         direction = new Vector2f(0, 0.1f);
         base.Create(scene);
-        sprite.Position = new Vector2f(0,-100);
+        sprite.Position = new Vector2f(0,0);
     }
     
     public override void Update(Scene scene, float deltaTime)
@@ -46,7 +47,7 @@ public class Background : Entity
 
     public void Loop(Scene scene)
     {
-        if (sprite.Position.Y >= 900)
+        if (sprite.Position.Y >= 500)
         {
             sprite.Position = new Vector2f(0,0);
         }

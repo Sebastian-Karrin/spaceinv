@@ -4,6 +4,7 @@ using SFML.Window;
 using SFML.System;
 
 namespace spaceinv;
+public delegate void ValueChangeEvent(Scene scene, int value);
 
 public class Scene
 {
@@ -13,6 +14,10 @@ public class Scene
     public List<Entity> entities;
     public bool gameOver;
     public float spawnTimer;
+    public event ValueChangeEvent LoseHealth;
+    public int lostHealth;
+    public void PublishLostHealth(int amount) => lostHealth += amount;
+
 
     public Scene()
     {
@@ -48,7 +53,12 @@ public class Scene
             if (entity.isDead) entities.RemoveAt(i);
             else i++;
         }
-       
+        if (lostHealth != 0)
+        {
+            LoseHealth?.Invoke(this ,lostHealth);
+            lostHealth = 0;
+        }
+
     }
 
     public void RenderAll(RenderTarget target)

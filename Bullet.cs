@@ -13,7 +13,6 @@ public class Bullet : Entity
     private List<Bullet> hBullets;
     private List<Bullet> eBullets;
     private Sprite _sprite;
-    
     public bool IsFromHero { get; set; } = false;
     public bool isFromEnemy { get; set; } = false;
     
@@ -42,7 +41,7 @@ public class Bullet : Entity
             if(IsFromHero)
             {
                 var newEPos = sprite.Position;
-                newEPos += new Vector2f(0,-1) * deltaTime * 300.0f;
+                newEPos += herodirection * deltaTime * 300.0f;
                 sprite.Position = newEPos;
                 return;
             }
@@ -53,8 +52,9 @@ public class Bullet : Entity
             if (isFromEnemy = true)
             {
                 var newEPos = _sprite.Position;
-                newEPos += new Vector2f(0, 1) * deltaTime * 300.0f;
+                newEPos += enemydirection * deltaTime * 300.0f;
                 _sprite.Position = newEPos;
+                
                 return;
             }
         }

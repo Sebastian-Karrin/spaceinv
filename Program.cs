@@ -25,6 +25,7 @@ namespace spaceinv
                     window.DispatchEvents();
                     float deltatime = clock.Restart().AsSeconds();
                     deltatime = MathF.Min(deltatime, 0.01f);
+                    if (deltatime > 0.01f) deltatime = 0.01f;
                     scene.UpdateAll(deltatime);
                     window.Clear(new Color(10,10,50));
                     scene.RenderAll(window);

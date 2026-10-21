@@ -11,39 +11,53 @@ public class HeroShip : Actor
 {
     public readonly Bullet bullet;
     private float bulletTimer;
+
     
     public HeroShip() : base()
     {
         sprite.TextureRect = new IntRect(112, 792, 112, 76);
         sprite.Origin = new Vector2f(56, 38);
         bullet = new Bullet();
+        originalPosition = new Vector2f(450, 450);
+        speed = 300.0f;
+
     }
     
     public override void Create(Scene scene)
     {
-        sprite.Position = new Vector2f(450, 450);
-        speed = 300.0f;
-        base.Create(scene);    
+        sprite.Position = originalPosition;
+        base.Create(scene);
+        scene.LoseHealth += OnLoseHealth;
     }
     
     public override void Update(Scene scene, float deltaTime)
     {
-        bulletTimer = MathF.Max(bulletTimer - deltaTime, 0.0f);
-        base.Update(scene, deltaTime);
-        if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && bulletTimer < 0.25)
+        if (!scene.gameOver)
         {
-            bulletTimer = 0.5f;
-            bullet.HeroBullet(scene,this);
-            bullet.isFromEnemy = false;
-            bullet.IsFromHero = true;
+            bulletTimer = MathF.Max(bulletTimer - deltaTime, 0.0f);
+        
+            if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && bulletTimer < 0.25)
+            {
+                bulletTimer = 0.5f;
+                bullet.HeroBullet(scene,this);
+                bullet.isFromEnemy = false;
+                bullet.IsFromHero = true;
+            }
+            
+            base.Update(scene, deltaTime);
         }
-
+        
     }
     
     public override void Render(RenderTarget target)
     {
         base.Render(target);
-        
+    }
+    
+    public override void Destroy(Scene scene)
+    {
+        base.Destroy(scene);
+        scene.LoseHealth -= OnLoseHealth;
     }
     
     protected override int PickDirectionX(Scene scene)
@@ -87,9 +101,18 @@ public class HeroShip : Actor
         return dirY;
     }
 
-    protected virtual void CollideWith(Scene scene, Entity e)
+    protected override void CollideWith(Scene scene, Entity e)
     {
-        
+        if (e is EnemyShip)
+        {
+            scene.PublishLostHealth(1);
+            e.isDead = true;
+        }
+    }
+    
+    private void OnLoseHealth(Scene scene, int amount)
+    {
+        Reset();
     }
 
 }

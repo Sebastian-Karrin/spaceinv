@@ -9,7 +9,7 @@ public class Entity
     private readonly string textureName;
     private readonly string fontName;
     protected readonly Sprite sprite;
-    public bool isDead = false;
+    public bool isDead;
     public virtual bool Solid => false;
 
     public FloatRect Bounds =>sprite.GetGlobalBounds();

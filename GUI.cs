@@ -12,7 +12,6 @@ public class GUI : Entity
     private int currentHealth;
     private int currentScore;
     
-    
     public GUI() : base("sheet", "kenvector_future_thin")
     {
         sprite.TextureRect = new IntRect(482, 358, 33, 25);
@@ -22,6 +21,7 @@ public class GUI : Entity
     public override void Create(Scene scene)
     {
         currentHealth = maxHealth;
+        scene.LoseHealth += OnLoseHealth;
         base.Create(scene);
     }
     
@@ -40,6 +40,16 @@ public class GUI : Entity
                 : new IntRect(797, 174, 30, 32);
             base.Render(target);
             sprite.Position += new Vector2f(33, 0);
+        }
+    }
+
+    private void OnLoseHealth(Scene scene, int amount)
+    {
+        currentHealth -= amount;
+        if (currentHealth <= 0)
+        {
+            scene.gameOver = true;
+            scene.LoseHealth -= OnLoseHealth;
         }
     }
 }

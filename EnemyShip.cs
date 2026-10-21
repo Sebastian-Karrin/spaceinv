@@ -40,16 +40,21 @@ public class EnemyShip : Actor
                 bullet.EnemyBullet(scene,this);
             }
         }
-        else
-        {
-            sprite.Position = originalPosition;
-            isDead = false;
-        }
+        Position = MathF.Floor(Position.Y) switch
+       {
+           > 942 => new Vector2f(Position.X, -42),
+           _ => Position
+       };
     }
     
     public override void Render(RenderTarget target)
     {
         base.Render(target);
+    }
+
+    public override void Destroy(Scene scene)
+    {
+        base.Destroy(scene);
     }
 
     protected override int PickDirectionX(Scene scene)
@@ -58,18 +63,28 @@ public class EnemyShip : Actor
         if (dirX == 0)
         {
             Random rnd = new Random();
-            if (rnd.Next(0, 10) >= 6) dirX = -1;
-            else dirX = 1;
+            if (rnd.Next(0, 10) >= 6)
+            {
+                dirX = -1;
+                sprite.Rotation = 45.0f;
+            }
+            else
+            {
+                dirX = 1;
+                sprite.Rotation = 45.0f;
+            }
         }
         if (dirX == 1 && sprite.Position.X >= 848)
         {
             dirX = -1;
+            sprite.Rotation = 45.0f;
             isMoving = true;
         }
 
         if (dirX == -1 && sprite.Position.X <= 52)
         {
             dirX = 1;
+            sprite.Rotation = -45.0f;
             isMoving = true;
         }
         return dirX;
@@ -89,9 +104,7 @@ public class EnemyShip : Actor
     {
         if (e is HeroShip)
         {
-            isDead = true;
-            Destroy(scene);
-            return;
+            e.isDead = true;
         }
 
         if (e is Bullet)
@@ -100,14 +113,8 @@ public class EnemyShip : Actor
             {
                 isDead = true;
                 Destroy(scene);
-                return;
             }
         }
-        /*if (e is Bullet)
-        {
-            isDead = true;
-            Destroy(scene);
-        }*/
     }
 
 }
