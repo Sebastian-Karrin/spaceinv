@@ -23,13 +23,18 @@ public class SceneLoader
         HeroShip heroShip = new HeroShip();
         EnemyShip enemyShip = new EnemyShip();
         Background background = new Background();
-
-            
-        scene.Spawn(background);
-        scene.Spawn(enemyShip);
-        scene.Spawn(heroShip);
-        scene.Spawn(gui);
         
+        scene.Spawn(background);
+        scene.Spawn(heroShip);
+        
+        scene.Spawn(enemyShip);
+
+        scene.Spawn(gui);
+
+    }
+
+    public void CreateScene(Scene scene)
+    {
     }
 
     public void Reload(Scene scene)

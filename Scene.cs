@@ -50,24 +50,24 @@ public class Scene
             Entity entity = entities[i];
             entity.Update(this, deltaTime);
         }
+        
         for (int i = 0; i < entities.Count; i++)
         {
             Entity entity = entities[i];
             if (entity.isDead) entities.RemoveAt(i);
             else i++;
         }
+        
         if (lostHealth != 0)
         {
             LoseHealth?.Invoke(this ,lostHealth);
             lostHealth = 0;
         }
-
         if (scoreGained != 0)
         {
             ScoreGained?.Invoke (this, scoreGained);
             scoreGained = 0;
         }
-        
     }
 
     public void RenderAll(RenderTarget target)

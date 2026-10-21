@@ -8,7 +8,8 @@ namespace spaceinv;
 
 public class EnemyShip : Actor
 {
-    public readonly Bullet Bullet;
+    public readonly Bullet hBullet;
+    public readonly Bullet eBullet;
     public readonly Explosion Explosion;
     private float bulletTimer;
     private Vector2f originalPosition;
@@ -20,7 +21,7 @@ public class EnemyShip : Actor
     {
         sprite.TextureRect = new IntRect(144, 156, 104, 84);
         sprite.Origin = new Vector2f(52,42);
-        Bullet = new Bullet();
+        eBullet = new Bullet();
         Explosion = new Explosion();
         originalPosition = new Vector2f(new Random().Next(10,890), -50);
     }
@@ -37,7 +38,7 @@ public class EnemyShip : Actor
         bulletTimer = MathF.Max(bulletTimer - deltaTime, 0.0f);
         spawnTimer = MathF.Max(spawnTimer - deltaTime, 0.0f);
         
-        base.Update(scene, deltaTime);
+        
         if (!isDead)
         {
             Position += ToVectorX(directionX) * (speed * deltaTime) + ToVectorY(directionY) * ((speed / 5) * deltaTime);
@@ -47,7 +48,7 @@ public class EnemyShip : Actor
                 Random random = new Random();
                 if (random.Next(0, 100) < 60)
                 {
-                    Bullet.EnemyBullet(scene,this);
+                    eBullet.EnemyBullet(scene,this);
                 }
                 
             }
@@ -57,6 +58,7 @@ public class EnemyShip : Actor
                 _ => Position
             }; 
         }
+        base.Update(scene, deltaTime);
         /*else
         {
             scene.Spawn(Explosion);
@@ -122,9 +124,10 @@ public class EnemyShip : Actor
 
     protected override void CollideWith(Scene scene, Entity e)
     {
-        if (e is Bullet)
+        if (e is HeroShip)
         {
-            
+            isDead = true;
+            scene.PublishLostHealth(1);
         }
     }
 
