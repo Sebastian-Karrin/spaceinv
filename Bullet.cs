@@ -28,6 +28,9 @@ public class Bullet : Entity
     }
     public override void Update(Scene scene, float deltaTime)
     {
+        var newPos = sprite.Position;
+        sprite.Position += bulletDirection * deltaTime * 300.0f; 
+        sprite.Position = newPos;
         
         
         base.Update(scene, deltaTime);
@@ -43,21 +46,22 @@ public class Bullet : Entity
        base.Destroy(scene);
     }
 
-    public void HeroBullet(Scene scene,HeroShip heroShip)
+    public void HeroBullet(Scene scene,HeroShip heroShip, Vector2f direction)
     {
         Bullet hbullet = new Bullet();
         scene.Spawn(hbullet);
         HBullets.Add(hbullet);
         hbullet.Position = heroShip.Position;
-        
+        bulletDirection = direction;
     }
 
-    public void EnemyBullet(Scene scene, EnemyShip enemyShip)
+    public void EnemyBullet(Scene scene, EnemyShip enemyShip, Vector2f direction)
     {
         Bullet ebullet = new Bullet();
         scene.Spawn(ebullet);
         EBullets.Add(ebullet);
         ebullet.Position = new Vector2f(enemyShip.Position.X, enemyShip.Position.Y);
+        bulletDirection = direction;
         
     }
 

@@ -45,7 +45,7 @@ public class EnemyShip : Actor
                 Random random = new Random();
                 if (random.Next(0, 100) < 60)
                 {
-                    Bullet.EnemyBullet(scene,this);
+                    Bullet.EnemyBullet(scene,this, new Vector2f(0, 1));
                 }
                 
             }

@@ -7,7 +7,7 @@ namespace spaceinv;
 
 public class GUI : Entity
 {
-    private int maxHealth;
+    protected int maxHealth;
     private int currentHealth;
     
     private Text scoreText;
