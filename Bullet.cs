@@ -44,12 +44,7 @@ public class Bullet : Entity
     
     public override void Destroy(Scene scene)
     {
-        if (sprite.Position.Y < 50)
-        {
-            base.Destroy(scene);
-            isDead = true;
-            scene.Clear();
-        }
+       base.Destroy(scene);
     }
 
     public void HeroBullet(Scene scene,HeroShip heroShip)

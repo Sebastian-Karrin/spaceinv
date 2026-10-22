@@ -15,20 +15,21 @@ public class GUI : Entity
     
     public GUI() : base("sheet", "kenvector_future_thin")
     {
-        sprite.TextureRect = new IntRect(482, 358, 33, 25);
         maxHealth = 3;
-        scoreText = new Text();
-        scoreText.Color = Color.White;
     }
     
     public override void Create(Scene scene)
     {
+        scoreText = new Text();
         
+        scoreText.Font = scene.Assets.LoadFont("kenvector_future_thin");
+        
+        sprite.TextureRect = new IntRect(482, 358, 33, 25);
         currentHealth = maxHealth;
+        base.Create(scene);
+
         scene.LoseHealth += OnLoseHealth;
         scene.ScoreGained += OnGainScore;
-        
-        base.Create(scene);
     }
     
     public override void Update(Scene scene, float deltaTime)
@@ -37,9 +38,7 @@ public class GUI : Entity
     }
     public override void Render(RenderTarget target)
     {
-        base.Render(target);
-        
-        sprite.Position = new Vector2f(450, 850);
+        sprite.Position = new Vector2f(750, 850);
         for (int i = 0; i < maxHealth; i++)
         {
             sprite.TextureRect = i < currentHealth
@@ -48,10 +47,10 @@ public class GUI : Entity
             base.Render(target);
             sprite.Position += new Vector2f(33, 0);
         }
-        if (currentHealth <= 0)
+        if (currentHealth > 0)
         {
             scoreText.DisplayedString = $"Score: {currentScore}";
-            scoreText.Position = new Vector2f(450, 450);
+            scoreText.Position = new Vector2f(10, 850);
             target.Draw(scoreText);
         }
     }
@@ -68,7 +67,10 @@ public class GUI : Entity
     
     private void OnGainScore(Scene scene, int score)
     {
-        currentScore += score;
+        if (scene.FindByType<HeroShip>(out _))
+        {
+            currentScore += score;
+        }
         if (currentHealth <= 0)
         {
             scene.ScoreGained -= OnGainScore;

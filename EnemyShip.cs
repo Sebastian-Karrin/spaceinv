@@ -12,10 +12,8 @@ public class EnemyShip : Actor
     public readonly Bullet eBullet;
     public readonly Explosion Explosion;
     private float bulletTimer;
+    private float expoTimer;
     private Vector2f originalPosition;
-    private Clock spawnClock = new Clock();
-    private float spawnTimer;
-    private float spawnclock;
 
     public EnemyShip() : base()
     {
@@ -36,7 +34,7 @@ public class EnemyShip : Actor
     public override void Update(Scene scene, float deltaTime)
     {
         bulletTimer = MathF.Max(bulletTimer - deltaTime, 0.0f);
-        spawnTimer = MathF.Max(spawnTimer - deltaTime, 0.0f);
+        expoTimer = MathF.Max(expoTimer - deltaTime, 0.0f);
         
         
         if (!isDead)
@@ -60,8 +58,13 @@ public class EnemyShip : Actor
         }
         else
         {
-            scene.Spawn(Explosion);
-            Explosion.Location(scene, this);
+            Explosion.Explode(scene, this);
+
+            /*if (expoTimer > 0.0f)
+            {
+                scene.Spawn(Explosion);
+                Explosion.Location(scene, this);
+            }*/
         }
         base.Update(scene, deltaTime);
 
@@ -70,7 +73,6 @@ public class EnemyShip : Actor
     public override void Render(RenderTarget target)
     {
         base.Render(target);
-       
     }
 
     public override void Destroy(Scene scene)
@@ -126,6 +128,7 @@ public class EnemyShip : Actor
         if (e is HeroShip)
         {
             isDead = true;
+            expoTimer = 1.0f;
             scene.PublishLostHealth(1);
         }
     }

@@ -50,7 +50,10 @@ public class SceneLoader
 
     public void Reload(Scene scene)
     {
+        scene.Clear();
         LoadScene(scene);
+        CreateScene(scene);
+        EnemyShipSpawner(scene);
     }
 
     public void EnemyShipSpawner(Scene scene)

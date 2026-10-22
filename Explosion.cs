@@ -108,4 +108,14 @@ public class Explosion : Entity
             aniTimer = aniClock.ElapsedTime.AsSeconds();
         }
     }
+
+    public void Explode(Scene scene, EnemyShip enemyShip)
+    {
+        aniTimer = 1.0f;
+        if (aniTimer > 1.0f)
+        {
+            scene.Spawn(this);
+            sprite.Position = new Vector2f(enemyShip.Position.X - 150, enemyShip.Position.Y - 140);
+        }
+    }
 }

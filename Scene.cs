@@ -33,7 +33,7 @@ public class Scene
         entities = new List<Entity>();
         Loader = new SceneLoader();
         Assets = new AssetManager();
-        gameOver = false;
+        gameOver = true;
     }
 
     public void Spawn(Entity entity)
@@ -44,32 +44,41 @@ public class Scene
 
     public void UpdateAll(float deltaTime)
     {
-        Loader.CreateScene(this);
-        Loader.EnemyShipSpawner(this);
+        if (gameOver)
+        {
+            gameOver = false;
+            Clear();
+            Loader.CreateScene(this);
+        }
+        if (!gameOver)
+        {
+            Loader.EnemyShipSpawner(this);
 
-        for (int i = entities.Count - 1; i >= 0; i--)
-        {
-            Entity entity = entities[i];
-            entity.Update(this, deltaTime);
-        }
+            for (int i = entities.Count - 1; i >= 0; i--)
+            {
+                Entity entity = entities[i];
+                entity.Update(this, deltaTime);
+            }
         
-        for (int i = 0; i < entities.Count; i++)
-        {
-            Entity entity = entities[i];
-            if (entity.isDead) entities.RemoveAt(i);
-            else i++;
-        }
+            for (int i = 0; i < entities.Count; i++)
+            {
+                Entity entity = entities[i];
+                if (entity.isDead) entities.RemoveAt(i);
+                else i++;
+            }
         
-        if (lostHealth != 0)
-        {
-            LoseHealth?.Invoke(this ,lostHealth);
-            lostHealth = 0;
+            if (lostHealth != 0)
+            {
+                LoseHealth?.Invoke(this ,lostHealth);
+                lostHealth = 0;
+            }
+            if (scoreGained != 0)
+            {
+                ScoreGained?.Invoke (this, scoreGained);
+                scoreGained = 0;
+            }
         }
-        if (scoreGained != 0)
-        {
-            ScoreGained?.Invoke (this, scoreGained);
-            scoreGained = 0;
-        }
+       
     }
 
     public void RenderAll(RenderTarget target)

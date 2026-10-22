@@ -9,7 +9,7 @@ namespace spaceinv;
 
 public class HeroShip : Actor
 {
-    public readonly Bullet hBullet;
+    public readonly Bullet Bullet;
     private float bulletTimer;
     private float immunityTimer;
     public Clock scoreClock;
@@ -20,7 +20,7 @@ public class HeroShip : Actor
     {
         sprite.TextureRect = new IntRect(112, 792, 112, 76);
         sprite.Origin = new Vector2f(56, 38);
-        hBullet = new Bullet();
+        Bullet = new Bullet();
         originalPosition = new Vector2f(450, 450);
         speed = 300.0f;
 
@@ -46,7 +46,7 @@ public class HeroShip : Actor
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && bulletTimer < 0.25)
             {
                 bulletTimer = 0.5f;
-                hBullet.HeroBullet(scene,this);
+                Bullet.HeroBullet(scene,this);
             }
 
             if (immunityTimer > 0.0f) sprite.Color = new Color(255, 255, 255,50);
@@ -131,7 +131,5 @@ public class HeroShip : Actor
             scene.PublishScoreGained(10);
             scoreClock.Restart();
         }
-        
     }
-
 }
