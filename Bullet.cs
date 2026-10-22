@@ -7,17 +7,62 @@ namespace spaceinv;
 
 public class Bullet : Entity
 {
+    public class EBullet : Entity
+    {
+        public Vector2f bulletDirection;
+        public Vector2f UP = new Vector2f(0, -1);
+        public Vector2f DOWN = new Vector2f(0, 1);
+        public List<Bullet> EBullets;
+       
+        
+        public EBullet() : base("sheet", "kenvector_future_thin")
+        {
+            sprite.TextureRect = new IntRect(856, 421, 9, 54);
+            EBullets = new List<Bullet>();
+        } 
+        public override void Create(Scene scene)
+        {
+            base.Create(scene);
+        
+        }
+        public override void Update(Scene scene, float deltaTime)
+        {
+            base.Update(scene, deltaTime);
+            var newPos = sprite.Position;
+            sprite.Position += new Vector2f(0, -1) * deltaTime * 300.0f; 
+            sprite.Position = newPos;
+     
+        }
+    
+        public override void Render(RenderTarget target)
+        {
+            base.Render(target);
+        }
+    
+        public override void Destroy(Scene scene)
+        {
+            base.Destroy(scene);
+        }
+        public void EnemyBullet(Scene scene, EnemyShip enemyShip)
+        {
+            Bullet ebullet = new Bullet();
+            scene.Spawn(ebullet);
+            EBullets.Add(ebullet);
+            ebullet.Position = new Vector2f(enemyShip.Position.X, enemyShip.Position.Y);
+        }
+    }
     public Vector2f bulletDirection;
     public Vector2f UP = new Vector2f(0, -1);
     public Vector2f DOWN = new Vector2f(0, 1);
-    public List<Bullet> EBullets;
     public List<Bullet> HBullets;
+
+   
 
     public Bullet() : base("sheet", "kenvector_future_thin")
     {
         sprite.TextureRect = new IntRect(856, 421, 9, 54);
         HBullets = new List<Bullet>();
-        EBullets = new List<Bullet>();
+       
        
     }
 
@@ -28,20 +73,11 @@ public class Bullet : Entity
     }
     public override void Update(Scene scene, float deltaTime)
     {
-        for (int h = 0; h < EBullets.Count; h++)
-        {
-            HBullets[h].bulletDirection = new Vector2f(0, -1);
-        }
-        
-        for (int i = 0; i < EBullets.Count; i++)
-        {
-            EBullets[i].bulletDirection = new Vector2f(0, 1);
-        }
-        
-        var newPos = sprite.Position;
-        sprite.Position += bulletDirection * deltaTime * 300.0f; 
-        sprite.Position = newPos;
         base.Update(scene, deltaTime);
+        var newPos = sprite.Position;
+        sprite.Position += new Vector2f(0, -1) * deltaTime * 300.0f; 
+        sprite.Position = newPos;
+     
     }
     
     public override void Render(RenderTarget target)
@@ -62,19 +98,7 @@ public class Bullet : Entity
         hbullet.Position = heroShip.Position;
         
     }
-
-    public void EnemyBullet(Scene scene, EnemyShip enemyShip)
-    {
-        Bullet ebullet = new Bullet();
-        scene.Spawn(ebullet);
-        EBullets.Add(ebullet);
-        ebullet.Position = new Vector2f(enemyShip.Position.X, enemyShip.Position.Y);
-       
-        
-    }
-
     protected override void CollideWith(Scene scene, Entity e)
     {
     }
-    
 }

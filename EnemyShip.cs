@@ -8,7 +8,7 @@ namespace spaceinv;
 
 public class EnemyShip : Actor
 {
-    public readonly Bullet Bullet;
+    public readonly Bullet.EBullet Bullet;
     public readonly Explosion Explosion;
     private float bulletTimer;
     private float expoTimer;
@@ -19,7 +19,7 @@ public class EnemyShip : Actor
         sprite.TextureRect = new IntRect(144, 156, 104, 84);
         sprite.Origin = new Vector2f(52,42);
         Explosion = new Explosion();
-        Bullet = new Bullet();
+        Bullet = new Bullet.EBullet();
         originalPosition = new Vector2f(new Random().Next(10,890), -50);
     }
     
