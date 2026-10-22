@@ -9,21 +9,19 @@ namespace spaceinv;
 
 public class HeroShip : Actor
 {
-    public readonly Bullet Bullet;
+    private readonly Bullet Bullet;
     private float bulletTimer;
     private float immunityTimer;
     public Clock scoreClock;
-    private float scoreTimestamp;
-
+    private float stopper = 0.2f;
     
     public HeroShip() : base()
     {
         sprite.TextureRect = new IntRect(112, 792, 112, 76);
         sprite.Origin = new Vector2f(56, 38);
-        Bullet = new Bullet();
         originalPosition = new Vector2f(450, 450);
         speed = 300.0f;
-
+        Bullet = new Bullet();
     }
     
     public override void Create(Scene scene)
@@ -42,11 +40,11 @@ public class HeroShip : Actor
             bulletTimer = MathF.Max(bulletTimer - deltaTime, 0.0f);
             immunityTimer = MathF.Max(immunityTimer - deltaTime, 0.0f);
 
-            OnGainScore(scene, 10);
+            OnGainScore(scene, 0);
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && bulletTimer < 0.25)
             {
                 bulletTimer = 0.5f;
-                Bullet.HeroBullet(scene,this);
+                Bullet.HeroBullet(scene, this);
             }
 
             if (immunityTimer > 0.0f) sprite.Color = new Color(255, 255, 255,50);
@@ -125,10 +123,9 @@ public class HeroShip : Actor
 
     private void OnGainScore(Scene scene, int amount)
     {
-        scoreTimestamp = scoreClock.ElapsedTime.AsSeconds();
-        if (scoreClock.ElapsedTime.AsSeconds() > scoreTimestamp + 1.0f)
+        if (scoreClock.ElapsedTime.AsSeconds() > stopper)
         {
-            scene.PublishScoreGained(10);
+            scene.PublishScoreGained(1);
             scoreClock.Restart();
         }
     }
