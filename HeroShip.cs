@@ -44,7 +44,7 @@ public class HeroShip : Actor
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && bulletTimer < 0.25)
             {
                 bulletTimer = 0.5f;
-                Bullet.HeroBullet(scene, this, new Vector2f(0, -1));
+                Bullet.HeroBullet(scene, this);
             }
 
             if (immunityTimer > 0.0f) sprite.Color = new Color(255, 255, 255,50);
