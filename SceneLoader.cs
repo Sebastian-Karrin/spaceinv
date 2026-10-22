@@ -10,7 +10,7 @@ public class SceneLoader
     private readonly Dictionary<char, Func<Entity>> loaders;
     private string currentScene = "", nextScene = "";
     private Clock enemyClock;
-    private float stopper = 10.0f;
+    private float stopper = 8.0f;
     
     public SceneLoader()
     {

@@ -53,7 +53,6 @@ public class Scene
         if (!gameOver)
         {
             Loader.EnemyShipSpawner(this);
-            //PublishScoreGained(1);
 
             for (int i = entities.Count - 1; i >= 0; i--)
             {

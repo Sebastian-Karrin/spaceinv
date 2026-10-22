@@ -5,22 +5,16 @@ using SFML.System;
 
 namespace spaceinv;
 
-public class Bullet : Entity
+public class Bullet : Actor
 {
-    public Vector2f bulletDirection;
-    public Vector2f UP = new Vector2f(0, -1);
-    public Vector2f DOWN = new Vector2f(0, 1);
-    public List<Bullet> HBullets;
-    public List<Bullet> EBullets;
-
-   
-
-    public Bullet() : base("sheet", "kenvector_future_thin")
+    public Vector2f direction {get; set;}
+    private float bulletSpeed = 200.0f;
+    private string ownerTag;
+    
+    public Bullet(string ownertag) : base()
     {
         sprite.TextureRect = new IntRect(856, 421, 9, 54);
-        HBullets = new List<Bullet>();
-        EBullets = new List<Bullet>();
-
+        ownerTag = ownertag;
     }
 
     public override void Create(Scene scene)
@@ -31,10 +25,20 @@ public class Bullet : Entity
     public override void Update(Scene scene, float deltaTime)
     {
         base.Update(scene, deltaTime);
-        var newPos = sprite.Position;
-        sprite.Position += new Vector2f(0, -1) * deltaTime * 300.0f; 
-        newPos = sprite.Position;
-     
+        if (ownerTag == "playerBullet")
+        {
+            var newHPos = sprite.Position;
+            sprite.Position += new Vector2f(0,-1) * deltaTime * bulletSpeed;
+            newHPos = sprite.Position;
+        }
+
+        if (ownerTag == "enemyBullet")
+        {
+            var newEPos = sprite.Position;
+            sprite.Position += new Vector2f(0,1) * deltaTime * bulletSpeed;
+            newEPos = sprite.Position;
+            sprite.Rotation = 180.0f;
+        }
     }
     
     public override void Render(RenderTarget target)
@@ -47,22 +51,38 @@ public class Bullet : Entity
        base.Destroy(scene);
     }
 
-    public void HeroBullet(Scene scene,HeroShip heroShip)
+    public void HeroBullet(Scene scene,HeroShip heroShip, string tag)
     {
-        Bullet hbullet = new Bullet();
-        scene.Spawn(hbullet);
-        HBullets.Add(hbullet);
-        hbullet.Position = heroShip.Position;
+        ownerTag = tag;
+        Bullet hbullet1 = new Bullet("playerBullet");
+        Bullet hbullet2 = new Bullet("playerBullet");
+        scene.Spawn(hbullet1);
+        scene.Spawn(hbullet2);
+        hbullet1.Position = new Vector2f(heroShip.Position.X - 30, heroShip.Position.Y + 10);
+        hbullet2.Position = new Vector2f(heroShip.Position.X + 30, heroShip.Position.Y + 10);
         
     }
-    public void EnemyBullet(Scene scene, EnemyShip enemyShip)
+    public void EnemyBullet(Scene scene, EnemyShip enemyShip, string tag)
     {
-        Bullet ebullet = new Bullet();
+        ownerTag = tag;
+        Bullet ebullet = new Bullet("enemyBullet");
         scene.Spawn(ebullet);
-        EBullets.Add(ebullet);
         ebullet.Position = new Vector2f(enemyShip.Position.X, enemyShip.Position.Y);
+        
     }
     protected override void CollideWith(Scene scene, Entity e)
     {
+        if (e is HeroShip)
+        {
+            if (ownerTag != "playerBullet")
+            {
+                scene.PublishLostHealth(1);
+            }
+        }
+
+        if (e is EnemyShip)
+        {
+            e.isDead = true;
+        }
     }
 }

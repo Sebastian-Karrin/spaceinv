@@ -1,4 +1,5 @@
-﻿using SFML.Graphics;
+﻿using System.Reflection.Metadata;
+using SFML.Graphics;
 using SFML.Window;
 using SFML.Graphics;
 using SFML.System;
@@ -9,7 +10,7 @@ namespace spaceinv;
 
 public class HeroShip : Actor
 {
-    private readonly Bullet Bullet;
+    private readonly Bullet Bullets;
     private float bulletTimer;
     private float immunityTimer;
     public Clock scoreClock;
@@ -21,7 +22,7 @@ public class HeroShip : Actor
         sprite.Origin = new Vector2f(56, 38);
         originalPosition = new Vector2f(450, 450);
         speed = 300.0f;
-        Bullet = new Bullet();
+        Bullets = new Bullet("playerBullet");
     }
     
     public override void Create(Scene scene)
@@ -44,7 +45,7 @@ public class HeroShip : Actor
             if (Keyboard.IsKeyPressed(Keyboard.Key.Space) && bulletTimer < 0.25)
             {
                 bulletTimer = 0.5f;
-                Bullet.HeroBullet(scene, this);
+                Bullets.HeroBullet(scene, this, "playerBullet");
             }
 
             if (immunityTimer > 0.0f) sprite.Color = new Color(255, 255, 255,50);
@@ -129,4 +130,5 @@ public class HeroShip : Actor
             scoreClock.Restart();
         }
     }
+    
 }

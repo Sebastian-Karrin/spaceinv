@@ -69,12 +69,6 @@ public class Explosion : Entity
     {
         base.Destroy(scene);
     }
-
-    public void Location(Scene scene, EnemyShip enemyShip)
-    {
-        sprite.Position = new Vector2f(enemyShip.Position.X - 150, enemyShip.Position.Y - 140);
-    }
-
     public void Animation()
     {
         if (delay < aniClock.ElapsedTime.AsSeconds())
@@ -111,7 +105,7 @@ public class Explosion : Entity
 
     public void Explode(Scene scene, EnemyShip enemyShip)
     {
-        aniTimer = 1.0f;
+        aniTimer = 1.5f;
         if (aniTimer > 1.0f)
         {
             scene.Spawn(this);
