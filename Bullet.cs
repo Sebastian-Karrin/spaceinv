@@ -7,7 +7,7 @@ namespace spaceinv;
 
 public class Bullet : Actor
 {
-    public Vector2f direction {get; set;}
+    private Vector2f direction {get; set;}
     private float bulletSpeed = 200.0f;
     private string ownerTag;
     

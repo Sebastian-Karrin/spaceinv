@@ -7,9 +7,9 @@ namespace spaceinv;
 
 public class Background : Entity
 {
-    public Vector2f direction = new Vector2f(0, 1);
-    private float scrollOffsetX = 0f;
-    private float scrollOffsetY = 0f;
+    protected Vector2f direction = new Vector2f(0, 1);
+    private float scrollOffsetX;
+    private float scrollOffsetY;
     private float scrollSpeedX = 50.0f;
     private float scrollSpeedY = 20.0f;
     private Texture backgroundTexture;

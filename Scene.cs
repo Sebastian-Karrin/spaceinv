@@ -21,7 +21,6 @@ public class Scene
     public int scoreGained;
 
     public bool gameOver;
-    public float spawnTimer;
     
     public void PublishLostHealth(int amount) => lostHealth += amount;
     public void PublishScoreGained(int amount) => scoreGained += amount;

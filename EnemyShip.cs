@@ -8,17 +8,15 @@ namespace spaceinv;
 
 public class EnemyShip : Actor
 {
-    public readonly Bullet Bullet;
-    public readonly Explosion Explosion;
+    private readonly Bullet Bullet;
+    private readonly Explosion Explosions;
     private float bulletTimer;
     private float expoTimer;
-    private Vector2f originalPosition;
-    
     public EnemyShip() : base()
     {
         sprite.TextureRect = new IntRect(144, 156, 104, 84);
         sprite.Origin = new Vector2f(52,42);
-        Explosion = new Explosion();
+        Explosions = new Explosion();
         Bullet = new Bullet("enemyBullet");
         originalPosition = new Vector2f(new Random().Next(10,890), -50);
     }
@@ -56,7 +54,7 @@ public class EnemyShip : Actor
         }
         else
         {
-            Explosion.Explode(scene, this);
+            Explosions.Explode(scene, this);
 
             /*if (expoTimer > 0.0f)
             {
@@ -127,7 +125,7 @@ public class EnemyShip : Actor
         {
             isDead = true;
             expoTimer = 1.0f;
-            Explosion.Explode(scene , this);
+            Explosions.Explode(scene , this);
             scene.PublishLostHealth(1);
         }
     }

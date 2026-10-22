@@ -9,32 +9,29 @@ namespace spaceinv;
 
 public class Explosion : Entity
 {
-    private IntRect frame1 = new IntRect(0,0,64,64);
-    private IntRect frame2 = new IntRect(64,0,64,64);
+    
     private IntRect frame3 = new IntRect(128,0,64,64);
+    
+    /*private IntRect frame1 = new IntRect(0,0,64,64);
+    private IntRect frame2 = new IntRect(64,0,64,64);
     private IntRect frame4 = new IntRect(192,0,64,64);
     private IntRect frame5 = new IntRect(256,0,64,64);
     private IntRect frame6 = new IntRect(320,0,64,64);
+    private List<IntRect> frames;*/
     
-    private List<IntRect> frames;
-    private int currentFrame = 0;
     private float aniTimer = 0.0f;
     private float delay = 1f;
     private Clock aniClock;
-
-    private bool lifetime;
-    private bool maxlifetime;
     
     public Explosion() : base("Explosion Medium", "")
     {
-        frames = new List<IntRect>();
-        
+        /*frames = new List<IntRect>();
         frames.Add(frame1);
         frames.Add(frame2);
         frames.Add(frame3);
         frames.Add(frame4);
         frames.Add(frame5);
-        frames.Add(frame6);
+        frames.Add(frame6);*/
         
         sprite.Scale =  new Vector2f(5,5);
         aniClock = new Clock();
