@@ -82,7 +82,10 @@ public class Bullet : Actor
 
         if (e is EnemyShip)
         {
-            e.isDead = true;
+            if (ownerTag != "enemyBullet")
+            {
+                e.isDead = true;
+            }
         }
     }
 }

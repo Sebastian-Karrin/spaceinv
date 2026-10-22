@@ -7,6 +7,7 @@ namespace spaceinv;
 
 public class SceneLoader
 {
+    
     private string currentScene = "", nextScene = "";
     private Clock enemyClock;
     private float stopper = 8.0f;
