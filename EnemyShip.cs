@@ -58,13 +58,12 @@ public class EnemyShip : Actor
                 _ => Position
             }; 
         }
-        base.Update(scene, deltaTime);
-        /*else
+        else
         {
             scene.Spawn(Explosion);
             Explosion.Location(scene, this);
-        }*/
-       
+        }
+        base.Update(scene, deltaTime);
 
     }
     
@@ -130,9 +129,4 @@ public class EnemyShip : Actor
             scene.PublishLostHealth(1);
         }
     }
-
-    private void Spawner(Scene scene)
-    {
-    }
-
 }

@@ -11,7 +11,7 @@ public class Background : Entity
     private float scrollOffsetX = 0f;
     private float scrollOffsetY = 0f;
     private float scrollSpeedX = 50.0f;
-    private float scrollSpeedY = 50.0f;
+    private float scrollSpeedY = 20.0f;
     private Texture backgroundTexture;
     
     public Background() : base("darkPurple", "kenvector_future_thin")

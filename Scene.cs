@@ -44,6 +44,8 @@ public class Scene
 
     public void UpdateAll(float deltaTime)
     {
+        Loader.CreateScene(this);
+        Loader.EnemyShipSpawner(this);
 
         for (int i = entities.Count - 1; i >= 0; i--)
         {

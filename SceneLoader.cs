@@ -9,10 +9,13 @@ public class SceneLoader
 {
     private readonly Dictionary<char, Func<Entity>> loaders;
     private string currentScene = "", nextScene = "";
+    private Clock enemyClock;
+    private float stopper = 10.0f;
     
     public SceneLoader()
     {
         loaders = new Dictionary<char, Func<Entity>>();
+        enemyClock = new Clock();
     }
 
     public void LoadScene(Scene scene)
@@ -23,18 +26,26 @@ public class SceneLoader
         HeroShip heroShip = new HeroShip();
         EnemyShip enemyShip = new EnemyShip();
         Background background = new Background();
-        
-        scene.Spawn(background);
-        scene.Spawn(heroShip);
-        
-        scene.Spawn(enemyShip);
-
-        scene.Spawn(gui);
 
     }
 
     public void CreateScene(Scene scene)
     {
+        if (!scene.FindByType<Background>(out _))
+        {
+            scene.Spawn(new Background());
+        }
+
+        if (!scene.FindByType<HeroShip>(out _))
+        {
+            scene.Spawn(new HeroShip());
+        }
+        
+
+        if (!scene.FindByType<GUI>(out _))
+        {
+            scene.Spawn(new GUI());
+        }
     }
 
     public void Reload(Scene scene)
@@ -44,19 +55,14 @@ public class SceneLoader
 
     public void EnemyShipSpawner(Scene scene)
     {
-        if (scene.spawnTimer < 1.0f)
+        if (stopper < enemyClock.ElapsedTime.AsSeconds())
         {
-            scene.spawnTimer = 10.0f;
-            for (float i = scene.spawnTimer; i >= 2; i--)
+            if (stopper > 3.0f)
             {
-                scene.spawnTimer += i;
-                if(!scene.FindByType<EnemyShip>(out _))
-                {
-                    EnemyShip enemyShip = new EnemyShip();
-                    scene.Spawn(enemyShip);
-                }
-               
+                stopper -= 0.5f;
             }
+            enemyClock.Restart();
+            EnemySpawner(scene);
         }
     }
 

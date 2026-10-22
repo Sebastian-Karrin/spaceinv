@@ -18,7 +18,8 @@ public class Explosion : Entity
     private List<IntRect> frames;
     private int currentFrame = 0;
     private float aniTimer = 0.0f;
-    private float delay = 0.1f;
+    private float delay = 1f;
+    private Clock aniClock;
     
     public Explosion() : base("Explosion Medium", "")
     {
@@ -29,7 +30,9 @@ public class Explosion : Entity
         frames.Add(frame4);
         frames.Add(frame5);
         frames.Add(frame6);
-        sprite.Scale = new Vector2f(2.0f, 2.0f);
+        sprite.Scale =  new Vector2f(5,5);
+        aniClock = new Clock();
+        sprite.TextureRect = frame3;
     }
     
     public override void Create(Scene scene)
@@ -39,7 +42,6 @@ public class Explosion : Entity
     public override void Update(Scene scene, float deltaTime)
     {
         aniTimer = MathF.Max(aniTimer - deltaTime, 0.0f);
-        
         /*if(frames.Count > 0)
         {
             if (aniTimer >= delay)
@@ -70,19 +72,40 @@ public class Explosion : Entity
 
     public void Location(Scene scene, EnemyShip enemyShip)
     {
-        sprite.Position = new Vector2f(enemyShip.Position.X, enemyShip.Position.Y);
+        sprite.Position = new Vector2f(enemyShip.Position.X - 150, enemyShip.Position.Y - 140);
     }
 
     public void Animation()
     {
-        while (currentFrame < frames.Count)
+        if (delay < aniClock.ElapsedTime.AsSeconds())
         {
-            if (aniTimer < delay)
-            {
-                sprite.TextureRect =  frames[currentFrame];
-                currentFrame++;
-                aniTimer = 1f;
-            }
+            sprite.TextureRect = frame1;
+            aniTimer = aniClock.ElapsedTime.AsSeconds();
+        }
+        if (sprite.TextureRect == frame1 && delay < aniClock.ElapsedTime.AsSeconds())
+        {
+            sprite.TextureRect = frame2;
+            aniTimer = aniClock.ElapsedTime.AsSeconds();
+        }
+        if (sprite.TextureRect == frame2 && delay < aniClock.ElapsedTime.AsSeconds())
+        {
+            sprite.TextureRect = frame3;
+            aniTimer = aniClock.ElapsedTime.AsSeconds();
+        }
+        if (sprite.TextureRect == frame3 && delay < aniClock.ElapsedTime.AsSeconds())
+        {
+            sprite.TextureRect = frame4;
+            aniTimer = aniClock.ElapsedTime.AsSeconds();
+        }
+        if (sprite.TextureRect == frame4 && delay < aniClock.ElapsedTime.AsSeconds())
+        {
+            sprite.TextureRect = frame5;
+            aniTimer = aniClock.ElapsedTime.AsSeconds();
+        }
+        if (sprite.TextureRect == frame5 && delay < aniClock.ElapsedTime.AsSeconds())
+        {
+            sprite.TextureRect = frame6;
+            aniTimer = aniClock.ElapsedTime.AsSeconds();
         }
     }
 }
