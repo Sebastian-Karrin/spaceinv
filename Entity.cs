@@ -10,7 +10,6 @@ public class Entity
     private readonly string fontName;
     protected readonly Sprite sprite;
     public bool isDead;
-
     public FloatRect Bounds =>sprite.GetGlobalBounds();
     public Vector2f Position { get => sprite.Position; set => sprite.Position = value; }
     protected Vector2f Velocity;
