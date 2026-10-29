@@ -113,7 +113,11 @@ public class HeroShip : Actor
     {
         if (e is EnemyShip)
         {
-            immunityTimer = 2.0f;
+            if (immunityTimer < 1.0f)
+            {
+                immunityTimer = 3.0f;
+                scene.PublishLostHealth(1);
+            }
         }
     }
     

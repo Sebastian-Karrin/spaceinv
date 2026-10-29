@@ -126,7 +126,6 @@ public class EnemyShip : Actor
             isDead = true;
             expoTimer = 1.0f;
             Explosions.Explode(scene , this);
-            scene.PublishLostHealth(1);
         }
     }
 }

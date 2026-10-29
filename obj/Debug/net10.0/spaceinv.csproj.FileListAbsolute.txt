@@ -1,10 +1,7 @@
 C:\Users\bebbe\Documents\GitHub\spaceinv\bin\Debug\net10.0\spaceinv.exe
 C:\Users\bebbe\Documents\GitHub\spaceinv\bin\Debug\net10.0\assets\kenvector_future_thin.ttf
 C:\Users\bebbe\Documents\GitHub\spaceinv\bin\Debug\net10.0\assets\darkPurple.png
-C:\Users\bebbe\Documents\GitHub\spaceinv\bin\Debug\net10.0\assets\enemyBlack3.png
-C:\Users\bebbe\Documents\GitHub\spaceinv\bin\Debug\net10.0\assets\playerShip1_blue.png
 C:\Users\bebbe\Documents\GitHub\spaceinv\bin\Debug\net10.0\assets\sheet.png
-C:\Users\bebbe\Documents\GitHub\spaceinv\bin\Debug\net10.0\assets\SheetbyOttoC.png
 C:\Users\bebbe\Documents\GitHub\spaceinv\bin\Debug\net10.0\spaceinv.deps.json
 C:\Users\bebbe\Documents\GitHub\spaceinv\bin\Debug\net10.0\spaceinv.runtimeconfig.json
 C:\Users\bebbe\Documents\GitHub\spaceinv\bin\Debug\net10.0\spaceinv.dll
