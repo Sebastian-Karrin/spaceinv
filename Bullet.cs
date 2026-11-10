@@ -7,6 +7,7 @@ namespace spaceinv;
 
 public class Bullet : Actor
 {
+    public readonly EnemyShip Enemy;
     private Vector2f direction {get; set;}
     private float bulletSpeed = 200.0f;
     private string ownerTag;
@@ -87,5 +88,10 @@ public class Bullet : Actor
                 e.isDead = true;
             }
         }
+    }
+
+    public void EnemyBulletDirection(EnemyShip enemyShip, Scene scene)
+    {
+        
     }
 }

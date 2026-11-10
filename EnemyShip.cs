@@ -90,7 +90,7 @@ public class EnemyShip : Actor
             else
             {
                 dirX = 1;
-                sprite.Rotation = 45.0f;
+                sprite.Rotation = -45.0f;
             }
         }
         if (dirX == 1 && sprite.Position.X >= 848)
