@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\TempSchoolShit\\JetBrains\\spaceinv\\spaceinv.csproj": {}
+    "C:\\Users\\bebbe\\Documents\\GitHub\\spaceinv\\spaceinv.csproj": {}
   },
   "projects": {
-    "C:\\TempSchoolShit\\JetBrains\\spaceinv\\spaceinv.csproj": {
+    "C:\\Users\\bebbe\\Documents\\GitHub\\spaceinv\\spaceinv.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\TempSchoolShit\\JetBrains\\spaceinv\\spaceinv.csproj",
+        "projectUniqueName": "C:\\Users\\bebbe\\Documents\\GitHub\\spaceinv\\spaceinv.csproj",
         "projectName": "spaceinv",
-        "projectPath": "C:\\TempSchoolShit\\JetBrains\\spaceinv\\spaceinv.csproj",
-        "packagesPath": "C:\\Users\\brumb\\.nuget\\packages\\",
-        "outputPath": "C:\\TempSchoolShit\\JetBrains\\spaceinv\\obj\\",
+        "projectPath": "C:\\Users\\bebbe\\Documents\\GitHub\\spaceinv\\spaceinv.csproj",
+        "packagesPath": "C:\\Users\\bebbe\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bebbe\\Documents\\GitHub\\spaceinv\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\brumb\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\bebbe\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -71,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.403/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.400/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
