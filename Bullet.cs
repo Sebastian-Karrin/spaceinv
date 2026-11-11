@@ -10,6 +10,8 @@ public class Bullet : Actor
     private Vector2f direction {get; set;}
     private float bulletSpeed = 200.0f;
     private string ownerTag;
+    public float eX;
+    public float ebDir;
     
     public Bullet(string ownertag) : base()
     {
@@ -34,9 +36,7 @@ public class Bullet : Actor
 
         if (ownerTag == "enemyBullet")
         {
-            var newEPos = sprite.Position;
-            sprite.Position += new Vector2f(0,1) * deltaTime * bulletSpeed;
-            newEPos = sprite.Position;
+            EnemyBulletVel(deltaTime);
             sprite.Rotation = 180.0f;
         }
     }
@@ -62,14 +62,27 @@ public class Bullet : Actor
         hbullet2.Position = new Vector2f(heroShip.Position.X + 30, heroShip.Position.Y + 10);
         
     }
-    public void EnemyBullet(Scene scene, EnemyShip enemyShip, string tag)
+    public void EnemyBullet(Scene scene, EnemyShip enemyShip, string tag, float velX, float velY)
     {
         ownerTag = tag;
         Bullet ebullet = new Bullet("enemyBullet");
         scene.Spawn(ebullet);
         ebullet.Position = new Vector2f(enemyShip.Position.X, enemyShip.Position.Y);
-        
     }
+
+    public void EnemyBulletVel(float deltaTime)
+    {
+        var xPos = Position.X - eX;
+        eX = Position.X;
+        if (xPos < 0) ebDir = -1;
+        else if (xPos > 0) ebDir = 1;
+        else  ebDir = 0;
+        
+        var newEPos = sprite.Position;
+        sprite.Position += new Vector2f(ebDir,1) * deltaTime * bulletSpeed;
+        newEPos = sprite.Position;
+    }
+    
     protected override void CollideWith(Scene scene, Entity e)
     {
         if (e is HeroShip)
@@ -87,10 +100,5 @@ public class Bullet : Actor
                 e.isDead = true;
             }
         }
-    }
-
-    public void EnemyBulletDirection(EnemyShip enemyShip, Scene scene)
-    {
-        
     }
 }

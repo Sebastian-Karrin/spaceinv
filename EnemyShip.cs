@@ -43,7 +43,7 @@ public class EnemyShip : Actor
                 Random random = new Random();
                 if (random.Next(0, 100) < 60)
                 {
-                    Bullet.EnemyBullet(scene,this, "enemyBullet");
+                    Bullet.EnemyBullet(scene,this, "enemyBullet", directionX, directionY);
                 }
             }
             Position = MathF.Floor(Position.Y) switch
