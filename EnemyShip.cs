@@ -12,6 +12,7 @@ public class EnemyShip : Actor
     private readonly Explosion Explosions;
     private float bulletTimer;
     private float expoTimer;
+    public float bulletdir;
     public EnemyShip() : base()
     {
         sprite.TextureRect = new IntRect(144, 156, 104, 84);
@@ -43,7 +44,7 @@ public class EnemyShip : Actor
                 Random random = new Random();
                 if (random.Next(0, 100) < 60)
                 {
-                    Bullet.EnemyBullet(scene,this, "enemyBullet", directionX);
+                    Bullet.EnemyBullet(scene,this, "enemyBullet");
                 }
             }
             Position = MathF.Floor(Position.Y) switch
@@ -85,17 +86,20 @@ public class EnemyShip : Actor
             if (rnd.Next(0, 10) >= 6)
             {
                 dirX = -1;
+                bulletdir = -1;
                 sprite.Rotation = 45.0f;
             }
             else
             {
                 dirX = 1;
+                bulletdir = 1;
                 sprite.Rotation = -45.0f;
             }
         }
         if (dirX == 1 && sprite.Position.X >= 848)
         {
             dirX = -1;
+            bulletdir = -1;
             sprite.Rotation = 45.0f;
             isMoving = true;
         }
@@ -103,6 +107,7 @@ public class EnemyShip : Actor
         if (dirX == -1 && sprite.Position.X <= 52)
         {
             dirX = 1;
+            bulletdir = 1;
             sprite.Rotation = -45.0f;
             isMoving = true;
         }

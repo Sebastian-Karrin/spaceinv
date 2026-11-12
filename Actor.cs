@@ -12,6 +12,8 @@ public class Actor : Entity
     public bool shooting;
     public bool isMoving;
     protected Vector2f originalPosition;
+    
+    
     protected static Vector2f ToVectorX(int dirX)
     {
         if(dirX == 1) return new Vector2f(1, 0); //Höger
@@ -45,7 +47,6 @@ public class Actor : Entity
         directionX = PickDirectionX(scene);
         directionY = PickDirectionY(scene);
         Position += ToVectorX(directionX) * (speed * deltaTime) + ToVectorY(directionY) * (speed * deltaTime);
-       
     }
 
     public override void Render(RenderTarget target)
