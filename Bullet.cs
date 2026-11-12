@@ -11,6 +11,7 @@ public class Bullet : Actor
     private float bulletSpeed = 200.0f;
     private string ownerTag;
     public float eX;
+    public float enemyShipDir;
     public float ebDir;
     
     public Bullet(string ownertag) : base()
@@ -62,17 +63,18 @@ public class Bullet : Actor
         hbullet2.Position = new Vector2f(heroShip.Position.X + 30, heroShip.Position.Y + 10);
         
     }
-    public void EnemyBullet(Scene scene, EnemyShip enemyShip, string tag, float velX, float velY)
+    public void EnemyBullet(Scene scene, EnemyShip enemyShip, string tag, float velX)
     {
         ownerTag = tag;
         Bullet ebullet = new Bullet("enemyBullet");
         scene.Spawn(ebullet);
         ebullet.Position = new Vector2f(enemyShip.Position.X, enemyShip.Position.Y);
+        enemyShipDir = velX;
     }
 
     public void EnemyBulletVel(float deltaTime)
     {
-        var xPos = Position.X - eX;
+        var xPos = enemyShipDir - eX;
         eX = Position.X;
         if (xPos < 0) ebDir = -1;
         else if (xPos > 0) ebDir = 1;
